@@ -1,11 +1,15 @@
 import Image from "next/image";
 import Navbar from "./components/Navbar";
-import { FaSellsy } from "react-icons/fa";
+import { FaMapMarkerAlt, FaSellsy } from "react-icons/fa";
 import { MdOutlineFavorite } from "react-icons/md";
 import { SiNamecheap } from "react-icons/si";
 import { GrServices } from "react-icons/gr";
 import CardProduct from "./components/CardProduct";
 import CardMarket from "./components/CardMarket";
+import Maps from "./components/Maps";
+import { PiBuildingOffice } from "react-icons/pi";
+import { MdOutlineLocalPostOffice } from "react-icons/md";
+import { BsTelephone } from "react-icons/bs";
 
 async function fetchData() {
   // default : cache : 'force-cache'
@@ -24,11 +28,17 @@ export default async function Home() {
       <div className="grid justify-center mt-14 sm:mt-16 lg:mt-20 gap-10 w-85/100 md:h-4/5 lg:w-3/4 mx-auto">
         <div className="banner grid sm:grid-cols-2 gap-8 sm:gap-0 md:items-center">
           <div className="left">
-            <div className="caption grid gap-2 lg:gap-2.5">
-              <h3 className="text-primary text-3xl lg:text-5xl font-semibold mb-1 lg:mb-3">Aseloley Cafe</h3>
-              <h3 className="text-white bg-primary text-3xl py-1 px-1.5 sm:px-2 lg:p-2.5 lg:text-5xl font-bold w-min">#CAFEKEKINIAN</h3>
+            <div className="caption grid gap-2">
+              <h3 className="text-secondary text-3xl lg:text-5xl font-semibold mb-1 lg:mb-3">Aseloley Cafe</h3>
+              <h3 className="text-white bg-secondary text-3xl py-1 px-1.5 sm:px-2 lg:p-2.5 lg:text-5xl font-bold w-min">#CAFEKEKINIAN</h3>
               <p className="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur porro, illum reiciendis quisquam deleniti iusto accusantium vel quae perspiciatis nulla ducimus natus similique, quod id.</p>
-              <button className="py-1 bg-primary rounded-lg text-white font-semibold w-1/3">Home</button>
+              {/* <div className="keyword flex gap-2 sm:gap-3">
+                <h5 className="py-1 px-2 bg-secondary text-white font-medium">Aesthetic</h5>
+                <h5 className="py-1 px-2 bg-secondary text-white font-medium">Beatiful</h5>
+                <h5 className="py-1 px-2 bg-secondary text-white font-medium">Modern</h5>
+                <h5 className="py-1 px-2 bg-secondary text-white font-medium">Cheap</h5>
+              </div>              */}
+              <button className="py-1 lg:mt-6 bg-secondary rounded-lg text-white font-semibold w-1/3">Home</button>
             </div>
           </div>
           <div className="right grid self-center">
@@ -36,7 +46,7 @@ export default async function Home() {
           </div>
         </div>
       </div>
-      <div className="status mt-16 sm:mt-24 md:mt-32 lg:mt-36 xl:mt-44 text-white py-4 grid gap-1 lg:gap-2 xl:gap-2.5 w-85/100 md:h-4/5 lg:w-3/4 mx-auto bg-primary">
+      <div className="status mt-16 sm:mt-24 md:mt-32 lg:mt-36 xl:mt-44 text-white py-4 grid gap-1 lg:gap-2 xl:gap-2.5 w-85/100 md:h-4/5 lg:w-3/4 mx-auto bg-secondary">
         <h3 className="text-center text-lg lg:text-xl font-semibold lg:font-bold">Tentang Kami</h3>
         <p className="text-center font-normal w-90/100 mx-auto">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo eius possimus non tempore voluptatum unde rerum voluptatem inventore sed modi. Fuga ea porro earum quasi.</p>
         <div className="mt-2 lg:mt-2.5 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -46,26 +56,26 @@ export default async function Home() {
         </div>
       </div>
       <div className="about my-16 grid gap-1 lg:gap-2 xl:gap-2.5 w-85/100 md:h-4/5 lg:w-3/4 mx-auto">
-        <h3 className="text-primary text-center text-lg lg:text-xl font-semibold lg:font-bold">Tentang Kami</h3>
+        <h3 className="text-secondary text-center text-lg lg:text-xl font-semibold lg:font-bold">Tentang Kami</h3>
         <p className="text-center font-normal">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo eius possimus non tempore voluptatum unde rerum voluptatem inventore sed modi. Fuga ea porro earum quasi.</p>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-          <div className="card bg-white p-5 border-2 text-center border-primary rounded-lg">
-            <FaSellsy className="text-7xl mb-1.5 text-primary mx-auto" />
+          <div className="card bg-white p-5 border-2 text-center border-secondary rounded-lg">
+            <FaSellsy className="text-7xl mb-1.5 text-secondary mx-auto" />
             <h4 className="font-bold">Ramai Pengunjung</h4>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
           </div>
-          <div className="card bg-white p-5 border-2 text-center border-primary rounded-lg">
-            <MdOutlineFavorite className="text-7xl mb-1.5 text-primary mx-auto" />
+          <div className="card bg-white p-5 border-2 text-center border-secondary rounded-lg">
+            <MdOutlineFavorite className="text-7xl mb-1.5 text-secondary mx-auto" />
             <h4 className="font-bold">Favorit</h4>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
           </div>
-          <div className="card bg-white p-5 border-2 text-center border-primary rounded-lg">
-            <SiNamecheap className="text-7xl mb-1.5 text-primary mx-auto" />
+          <div className="card bg-white p-5 border-2 text-center border-secondary rounded-lg">
+            <SiNamecheap className="text-7xl mb-1.5 text-secondary mx-auto" />
             <h4 className="font-bold">Murah</h4>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
           </div>
-          <div className="card bg-white p-5 border-2 text-center border-primary rounded-lg">
-            <GrServices className="text-7xl mb-1.5 text-primary mx-auto" />
+          <div className="card bg-white p-5 border-2 text-center border-secondary rounded-lg">
+            <GrServices className="text-7xl mb-1.5 text-secondary mx-auto" />
             <h4 className="font-bold">Pelayanan Terbaik</h4>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
           </div>
@@ -77,13 +87,79 @@ export default async function Home() {
         <p className="text-white font-medium lg:font-semibold z-50 w-90/100 lg:w-3/4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam dolor doloremque soluta optio perspiciatis ipsa harum inventore modi nobis sequi.</p>
       </div>
       <div className="product grid lg:gap-2 justify-centersm:py-5 mt-24 sm:mt-32 md:mt-40 lg:mt-48 xl:mt-56 w-85/100 md:h-4/5 lg:w-3/4 mx-auto">
-        <h3 className="text-primary text-lg lg:text-xl font-semibold lg:font-bold text-center">Penjualan Terlaris</h3>
+        <h3 className="text-secondary text-lg lg:text-xl font-semibold lg:font-bold text-center">Penjualan Terlaris</h3>
         <p className="font-normal text-center">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo eius possimus non tempore voluptatum unde rerum voluptatem inventore sed modi. Fuga ea porro earum quasi.</p>
         <div className="wrapper-card mt-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {status && data.map((item: any) => <CardProduct key={item.id} product={item} />)}
         </div>
       </div>
-      <div className="mt-16 bg-primary py-2 text-center">Footer</div>
+      <div className="grid gap-5 my-28 w-85/100 md:h-4/5 lg:w-3/4 mx-auto lg:grid-cols-2">
+        <div className="caption grid gap-5 sm:gap-6 md:gap-7 lg:gap-8 lg:h-min">
+          <div className="description">
+            <h3 className="text-secondary text-2xl font-semibold lg:font-bold">Aseloley Cafe</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, blanditiis? Jln. Aseloley No.44 Lumajang</p>
+          </div>
+          <div className="contact">
+            <div className="location grid gap-4">
+              <div className="info">
+                <div className="flex gap-2 items-center">
+                  <PiBuildingOffice className="text-secondary text-3xl" />
+                  <h4 className="font-bold text-lg">Aseloley Cafe</h4>
+                </div>
+                {/* <div className="flex text-white"><PiBuildingOffice />
+                  <p className="text-black"> Jln. Aseloley No.44 Lumajang</p>
+                </div> */}
+                <p className="ml-9"> Jln. Aseloley No.44 Lumajang</p>
+              </div>
+              <div className="telp flex gap-2 items-center">
+                <BsTelephone className="text-secondary text-2xl mr-1" />
+                <p>08123456789</p>
+              </div>
+              <div className="info flex gap-2 items-center">
+                <MdOutlineLocalPostOffice className="text-secondary text-3xl" />
+                <p>aseloleycafe@gmail.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="maps">
+          <Maps />
+        </div>
+      </div>
+      <div className="footer grid gap-20 bg-secondary text-white py-10 px-6 sm:px-10 md:px-16 lg:px-24 xl:px-36 mx-auto">
+        <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
+          <h3 className="text-3xl font-semibold">Aseloley Cafe</h3>
+          <div className="company grid gap-1.5">
+            <h5 className="font-semibold text-lg">Company</h5>
+            <div className="grid gap-0.5">
+              <p>Home</p>
+              <p>About</p>
+              <p>Product</p>
+              <p>Contact Us</p>
+            </div>
+          </div>
+          <div className="legal grid gap-1.5">
+            <h5 className="font-semibold text-lg">Legal</h5>
+            <div className="grid gap-0.5">
+              <p>Privacy Policy</p>
+              <p>Terms & Conditions</p>
+              <p>Cookie Policy</p>
+              <p>FAQ</p></div>
+          </div>
+          <div className="contact grid gap-1.5">
+            <h5 className="font-semibold text-lg">Contact Us</h5>
+            <div className="grid gap-0.5">
+              <p>08123456789</p>
+              <p>aseloleycafe@gmail</p>
+              <p>Jln. Aseloley No.44 Lumajang</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <hr />
+          <p className="font-semibold text-end mt-1">Copyright © 2022. Aseloley. All Rights Reserved</p>
+        </div>
+      </div>
     </main>
   );
 }
