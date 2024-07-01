@@ -6,7 +6,7 @@ import WrapperSession from "./components/WrapperSession";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Aseloley App",
+  title: "Soul Cafe App",
   description: "Welcomebek my app mamankkkk",
 };
 

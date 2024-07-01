@@ -12,7 +12,7 @@ export default function Navbar() {
                 <IoMdMenu className="text-2xl sm:text-3xl text-primary md:hidden" onClick={setStatus} />
             </div>
             <div className={`${status ? "block" : "hidden"} md:block url text-center`}>
-                <ul className="grid gap-3 pt-2 pb-3 md:pt-0 md:pb-0 md:grid-flow-col md:justify-between">
+                <ul className="grid gap-5 md:gap-0 py-4 md:py-0 md:grid-flow-col md:justify-between">
                     <li className="font-normal lg:font-medium text-sm hover:font-semibold hover:text-primary cursor-pointer">Home</li>
                     <li className="font-normal lg:font-medium text-sm hover:font-semibold hover:text-primary cursor-pointer">About</li>
                     <li className="font-normal lg:font-medium text-sm hover:font-semibold hover:text-primary cursor-pointer">Info</li>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Navbar from "./components/Navbar";
-import { FaMapMarkerAlt, FaSellsy } from "react-icons/fa";
+import {  FaSellsy } from "react-icons/fa";
 import { MdOutlineFavorite } from "react-icons/md";
 import { SiNamecheap } from "react-icons/si";
 import { GrServices } from "react-icons/gr";
@@ -10,6 +10,7 @@ import Maps from "./components/Maps";
 import { PiBuildingOffice } from "react-icons/pi";
 import { MdOutlineLocalPostOffice } from "react-icons/md";
 import { BsTelephone } from "react-icons/bs";
+import Link from "next/link";
 
 async function fetchData() {
   // default : cache : 'force-cache'
@@ -29,16 +30,10 @@ export default async function Home() {
         <div className="banner grid sm:grid-cols-2 gap-8 sm:gap-0 md:items-center">
           <div className="left">
             <div className="caption grid gap-2">
-              <h3 className="text-secondary text-3xl lg:text-5xl font-semibold mb-1 lg:mb-3">Aseloley Cafe</h3>
+              <h3 className="text-secondary text-3xl lg:text-5xl font-semibold mb-1 lg:mb-3">Soul Cafe</h3>
               <h3 className="text-white bg-secondary text-3xl py-1 px-1.5 sm:px-2 lg:p-2.5 lg:text-5xl font-bold w-min">#CAFEKEKINIAN</h3>
               <p className="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur porro, illum reiciendis quisquam deleniti iusto accusantium vel quae perspiciatis nulla ducimus natus similique, quod id.</p>
-              {/* <div className="keyword flex gap-2 sm:gap-3">
-                <h5 className="py-1 px-2 bg-secondary text-white font-medium">Aesthetic</h5>
-                <h5 className="py-1 px-2 bg-secondary text-white font-medium">Beatiful</h5>
-                <h5 className="py-1 px-2 bg-secondary text-white font-medium">Modern</h5>
-                <h5 className="py-1 px-2 bg-secondary text-white font-medium">Cheap</h5>
-              </div>              */}
-              <button className="py-1 lg:mt-6 bg-secondary rounded-lg text-white font-semibold w-1/3">Home</button>
+              <Link href="/auth/login" className="py-1 lg:mt-6 bg-secondary rounded-lg text-white font-semibold w-min px-4 lg:px-5">Login/Register</Link>
             </div>
           </div>
           <div className="right grid self-center">
@@ -83,7 +78,7 @@ export default async function Home() {
       </div>
       <div className="banner-lanscape relative grid justify-center mt-20 p-3 sm:p-5 lg:p-6 w-85/100 md:h-4/5 lg:w-3/4 mx-auto">
         <Image src={"/banner-lanscape.jpg"} alt="login" width={5000} height={5000} className="absolute h-48 sm:h-60 md:h-64 lg:h-64 xl:h-72 object-cover -scale-x-100" />
-        <h3 className="text-white text-3xl lg:text-5xl font-semibold z-50">Aseloley Cafe</h3>
+        <h3 className="text-white text-3xl lg:text-5xl font-semibold z-50">Soul Cafe</h3>
         <p className="text-white font-medium lg:font-semibold z-50 w-90/100 lg:w-3/4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam dolor doloremque soluta optio perspiciatis ipsa harum inventore modi nobis sequi.</p>
       </div>
       <div className="product grid lg:gap-2 justify-centersm:py-5 mt-24 sm:mt-32 md:mt-40 lg:mt-48 xl:mt-56 w-85/100 md:h-4/5 lg:w-3/4 mx-auto">
@@ -96,7 +91,7 @@ export default async function Home() {
       <div className="grid gap-5 my-28 w-85/100 md:h-4/5 lg:w-3/4 mx-auto lg:grid-cols-2">
         <div className="caption grid gap-5 sm:gap-6 md:gap-7 lg:gap-8 lg:h-min">
           <div className="description">
-            <h3 className="text-secondary text-2xl font-semibold lg:font-bold">Aseloley Cafe</h3>
+            <h3 className="text-secondary text-2xl font-semibold lg:font-bold">Soul Cafe</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, blanditiis? Jln. Aseloley No.44 Lumajang</p>
           </div>
           <div className="contact">
@@ -104,7 +99,7 @@ export default async function Home() {
               <div className="info">
                 <div className="flex gap-2 items-center">
                   <PiBuildingOffice className="text-secondary text-3xl" />
-                  <h4 className="font-bold text-lg">Aseloley Cafe</h4>
+                  <h4 className="font-bold text-lg">Soul Cafe</h4>
                 </div>
                 {/* <div className="flex text-white"><PiBuildingOffice />
                   <p className="text-black"> Jln. Aseloley No.44 Lumajang</p>
@@ -128,7 +123,7 @@ export default async function Home() {
       </div>
       <div className="footer grid gap-20 bg-secondary text-white py-10 px-6 sm:px-10 md:px-16 lg:px-24 xl:px-36 mx-auto">
         <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
-          <h3 className="text-3xl font-semibold">Aseloley Cafe</h3>
+          <h3 className="text-3xl font-semibold">Soul Cafe</h3>
           <div className="company grid gap-1.5">
             <h5 className="font-semibold text-lg">Company</h5>
             <div className="grid gap-0.5">
