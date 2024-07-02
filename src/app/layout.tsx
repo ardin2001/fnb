@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import WrapperSession from "./components/WrapperSession";
+import WrapperSession from "./wrapper/WrapperSession";
+import SidebarContextProvider from "./context/SidebarContext";
+import ThemeContextProvider from "./context/ThemeContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +21,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className}`}>
         <WrapperSession>
-          {children}
+          <SidebarContextProvider>
+            <ThemeContextProvider>
+            {children}
+            </ThemeContextProvider>
+          </SidebarContextProvider>
         </WrapperSession>
       </body>
     </html>

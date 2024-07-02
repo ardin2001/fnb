@@ -1,16 +1,17 @@
 import Image from "next/image";
-import Navbar from "./components/Navbar";
-import {  FaSellsy } from "react-icons/fa";
+import Navbar from "./components/User/Root/Navbar";
+import { FaSellsy } from "react-icons/fa";
 import { MdOutlineFavorite } from "react-icons/md";
 import { SiNamecheap } from "react-icons/si";
 import { GrServices } from "react-icons/gr";
-import CardProduct from "./components/CardProduct";
-import CardMarket from "./components/CardMarket";
-import Maps from "./components/Maps";
+import CardProduct from "./components/User/Root/CardProduct";
+import CardMarket from "./components/User/Root/CardMarket";
+import Maps from "./components/User/Root/Maps";
 import { PiBuildingOffice } from "react-icons/pi";
 import { MdOutlineLocalPostOffice } from "react-icons/md";
 import { BsTelephone } from "react-icons/bs";
 import Link from "next/link";
+import Theme from "./components/Theme";
 
 async function fetchData() {
   // default : cache : 'force-cache'
@@ -121,9 +122,13 @@ export default async function Home() {
           <Maps />
         </div>
       </div>
+      <Theme classname="fixed bottom-2.5 right-2.5 grid place-content-center bg-secondary text-white drop-shadow-strong rounded-full p-2" />
       <div className="footer grid gap-20 bg-secondary text-white py-10 px-6 sm:px-10 md:px-16 lg:px-24 xl:px-36 mx-auto">
         <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
-          <h3 className="text-3xl font-semibold">Soul Cafe</h3>
+          <div className="info">
+            <h3 className="text-3xl font-semibold">Soul Cafe</h3>
+            <p>Jln. Aseloley No.44 Lumajang</p>
+          </div>
           <div className="company grid gap-1.5">
             <h5 className="font-semibold text-lg">Company</h5>
             <div className="grid gap-0.5">
