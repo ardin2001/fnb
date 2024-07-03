@@ -12,6 +12,8 @@ import { MdOutlineLocalPostOffice } from "react-icons/md";
 import { BsTelephone } from "react-icons/bs";
 import Link from "next/link";
 import Theme from "./components/Theme";
+import Banner from "./components/User/Root/Banner";
+import Footer from "./components/User/Root/Footer";
 
 async function fetchData() {
   // default : cache : 'force-cache'
@@ -43,7 +45,7 @@ export default async function Home() {
         </div>
       </div>
       <div className="status mt-16 sm:mt-24 md:mt-32 lg:mt-36 xl:mt-44 text-white py-4 grid gap-1 lg:gap-2 xl:gap-2.5 w-85/100 md:h-4/5 lg:w-3/4 mx-auto bg-secondary">
-        <h3 className="text-center text-lg lg:text-xl font-semibold lg:font-bold">Tentang Kami</h3>
+        <h3 className="text-center text-lg lg:text-xl font-semibold lg:font-bold">Pencapaian</h3>
         <p className="text-center font-normal w-90/100 mx-auto">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo eius possimus non tempore voluptatum unde rerum voluptatem inventore sed modi. Fuga ea porro earum quasi.</p>
         <div className="mt-2 lg:mt-2.5 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
           <CardMarket value={100} caption="Cabang" />
@@ -77,19 +79,15 @@ export default async function Home() {
           </div>
         </div>
       </div>
-      <div className="banner-lanscape relative grid justify-center mt-20 p-3 sm:p-5 lg:p-6 w-85/100 md:h-4/5 lg:w-3/4 mx-auto">
-        <Image src={"/banner-lanscape.jpg"} alt="login" width={5000} height={5000} className="absolute h-48 sm:h-60 md:h-64 lg:h-64 xl:h-72 object-cover -scale-x-100" />
-        <h3 className="text-white text-3xl lg:text-5xl font-semibold z-50">Soul Cafe</h3>
-        <p className="text-white font-medium lg:font-semibold z-50 w-90/100 lg:w-3/4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam dolor doloremque soluta optio perspiciatis ipsa harum inventore modi nobis sequi.</p>
-      </div>
-      <div className="product grid lg:gap-2 justify-centersm:py-5 mt-24 sm:mt-32 md:mt-40 lg:mt-48 xl:mt-56 w-85/100 md:h-4/5 lg:w-3/4 mx-auto">
+      <Banner />
+      {/* <div className="product grid lg:gap-2 justify-centersm:py-5 mt-24 sm:mt-32 md:mt-40 lg:mt-48 xl:mt-56 w-85/100 md:h-4/5 lg:w-3/4 mx-auto">
         <h3 className="text-secondary text-lg lg:text-xl font-semibold lg:font-bold text-center">Penjualan Terlaris</h3>
         <p className="font-normal text-center">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo eius possimus non tempore voluptatum unde rerum voluptatem inventore sed modi. Fuga ea porro earum quasi.</p>
         <div className="wrapper-card mt-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {status && data.map((item: any) => <CardProduct key={item.id} product={item} />)}
         </div>
-      </div>
-      <div className="grid gap-5 my-28 w-85/100 md:h-4/5 lg:w-3/4 mx-auto lg:grid-cols-2">
+      </div> */}
+      {/* <div className="maps grid gap-5 my-28 w-85/100 md:h-4/5 lg:w-3/4 mx-auto lg:grid-cols-2">
         <div className="caption grid gap-5 sm:gap-6 md:gap-7 lg:gap-8 lg:h-min">
           <div className="description">
             <h3 className="text-secondary text-2xl font-semibold lg:font-bold">Soul Cafe</h3>
@@ -102,9 +100,6 @@ export default async function Home() {
                   <PiBuildingOffice className="text-secondary text-3xl" />
                   <h4 className="font-semibold text-lg">Soul Cafe</h4>
                 </div>
-                {/* <div className="flex text-white"><PiBuildingOffice />
-                  <p className="text-black"> Jln. Aseloley No.44 Lumajang</p>
-                </div> */}
                 <p className="ml-9"> Jln. Aseloley No.44 Lumajang</p>
               </div>
               <div className="telp flex gap-2 items-center">
@@ -121,45 +116,9 @@ export default async function Home() {
         <div className="maps">
           <Maps />
         </div>
-      </div>
-      <Theme classname="fixed bottom-2.5 right-2.5 grid place-content-center bg-secondary text-white drop-shadow-strong rounded-full p-2" />
-      <div className="footer grid gap-20 bg-secondary text-white py-10 px-6 sm:px-10 md:px-16 lg:px-24 xl:px-36 mx-auto">
-        <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="info">
-            <h3 className="text-3xl font-semibold">Soul Cafe</h3>
-            <p>Jln. Aseloley No.44 Lumajang</p>
-          </div>
-          <div className="company grid gap-1.5">
-            <h5 className="font-semibold text-lg">Company</h5>
-            <div className="grid gap-0.5">
-              <p>Home</p>
-              <p>About</p>
-              <p>Product</p>
-              <p>Contact Us</p>
-            </div>
-          </div>
-          <div className="legal grid gap-1.5">
-            <h5 className="font-semibold text-lg">Legal</h5>
-            <div className="grid gap-0.5">
-              <p>Privacy Policy</p>
-              <p>Terms & Conditions</p>
-              <p>Cookie Policy</p>
-              <p>FAQ</p></div>
-          </div>
-          <div className="contact grid gap-1.5">
-            <h5 className="font-semibold text-lg">Contact Us</h5>
-            <div className="grid gap-0.5">
-              <p>08123456789</p>
-              <p>aseloleycafe@gmail</p>
-              <p>Jln. Aseloley No.44 Lumajang</p>
-            </div>
-          </div>
-        </div>
-        <div>
-          <hr />
-          <p className="font-semibold text-end mt-1">Copyright © 2022. Aseloley. All Rights Reserved</p>
-        </div>
-      </div>
+      </div> */}
+      {/* <Theme classname="fixed bottom-2.5 right-2.5 grid place-content-center bg-secondary text-white drop-shadow-strong rounded-full p-2" /> */}
+      <Footer />
     </main>
   );
 }
