@@ -140,7 +140,9 @@ const config: Config = {
         "high": "2px",
       },
       boxShadow :{
-        "low": "0 0 4px 4px",
+        "furdamental": "0 0 4px 4px",
+        "intermediate": "0 0 5px 5px",
+        "advanced": "0 0 6px 6px",
       }
     },
   },

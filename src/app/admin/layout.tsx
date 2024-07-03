@@ -14,6 +14,7 @@ export default function DashboardLayout({
     const arrPathname = pathname.split("/")
     const title = Capitalize(arrPathname[2])
     const [open, setOpen]: any = UseStatus()
+    console.log("open", open)
     const HandlerMain = () => {
         if (open) {
             setOpen()
@@ -22,7 +23,7 @@ export default function DashboardLayout({
 
     return (
         <main className="flex bg-white">
-            <Sidebar classname={`${open ? "left-0 ease-in duration-500 z-50" : "-left-80 ease-out duration-500"} w-64 fixed h-screen px-6 py-5 flex flex-col justify-between bg-white shadow-low shadow-gray-300 overflow-y-auto lg:w-80 lg:sticky`} />
+            <Sidebar setOpen={() => setOpen((prev: any) => !prev)} classname={`${open ? "left-0 duration-500 z-50" : "-left-80 duration-500"} ease-in w-64 fixed h-screen px-6 pt-4 pb-8 flex flex-col justify-between bg-white shadow-furdamental shadow-gray-300 overflow-y-auto lg:w-80 lg:sticky`} />
             <div className={`${open ? "duration-500 blur-medium" : null} content w-full px-5 py-3 sm:px-7 sm:py-4 md:px-8 flex flex-col gap-2 sm:gap-2.5 lg:gap-3 lg:blur-none`} onClick={HandlerMain}>
                 <TopBar classname="flex justify-between items-center" setOpen={() => setOpen((prev: any) => !prev)} title={title} />
                 {children}
