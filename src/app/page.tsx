@@ -28,7 +28,7 @@ export default async function Home() {
   const { status, data } = await fetchData()
   return (
     <main className="bg-low">
-      <Navbar />
+      {/* <Navbar /> */}
       {/* <div className="grid justify-center mt-14 sm:mt-16 lg:mt-20 gap-10 w-85/100 md:h-4/5 lg:w-3/4 mx-auto">
         <div className="banner grid sm:grid-cols-2 gap-8 sm:gap-0 md:items-center">
           <div className="left">
@@ -79,7 +79,7 @@ export default async function Home() {
           </div>
         </div>
       </div> */}
-      <Banner />
+      {/* <Banner /> */}
       {/* <div className="product grid lg:gap-2 justify-centersm:py-5 mt-24 sm:mt-32 md:mt-40 lg:mt-48 xl:mt-56 w-85/100 md:h-4/5 lg:w-3/4 mx-auto">
         <h3 className="text-secondary text-lg lg:text-xl font-semibold lg:font-bold text-center">Penjualan Terlaris</h3>
         <p className="font-normal text-center">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo eius possimus non tempore voluptatum unde rerum voluptatem inventore sed modi. Fuga ea porro earum quasi.</p>
@@ -118,7 +118,7 @@ export default async function Home() {
         </div>
       </div> */}
       {/* <Theme classname="fixed bottom-2.5 right-2.5 grid place-content-center bg-secondary text-white drop-shadow-strong rounded-full p-2" /> */}
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 }
