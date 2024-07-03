@@ -11,7 +11,7 @@ import CardMarket from "./components/User/Root/CardMarket";
 // import { MdOutlineLocalPostOffice } from "react-icons/md";
 // import { BsTelephone } from "react-icons/bs";
 import Link from "next/link";
-// import Theme from "./components/Theme";
+import Theme from "./components/Theme";
 import Banner from "./components/User/Root/Banner";
 import Footer from "./components/User/Root/Footer";
 
@@ -116,8 +116,8 @@ export default async function Home() {
         <div className="maps">
           <Maps />
         </div>
-      </div>
-      <Theme classname="fixed bottom-2.5 right-2.5 grid place-content-center bg-secondary text-white drop-shadow-strong rounded-full p-2" /> */}
+      </div> */}
+      <Theme classname="fixed bottom-2.5 right-2.5 grid place-content-center bg-secondary text-white drop-shadow-strong rounded-full p-2" />
       <Footer />
     </main>
   );
