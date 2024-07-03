@@ -1,11 +1,11 @@
 "use client"
 
 import { createContext } from 'react'
-import UseStatus from '../hooks/UseStatus'
+import { useState } from 'react';
 
 const SidebarContext = createContext({})
 export function SidebarContextProvider({ children }: any) {
-    const [open, setOpen] = UseStatus();
+    const [open, setOpen] = useState();
     return (
         <SidebarContext.Provider value={{ open, setOpen }}>
             {children}

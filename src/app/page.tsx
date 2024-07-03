@@ -100,7 +100,7 @@ export default async function Home() {
               <div className="info">
                 <div className="flex gap-2 items-center">
                   <PiBuildingOffice className="text-secondary text-3xl" />
-                  <h4 className="font-bold text-lg">Soul Cafe</h4>
+                  <h4 className="font-semibold text-lg">Soul Cafe</h4>
                 </div>
                 {/* <div className="flex text-white"><PiBuildingOffice />
                   <p className="text-black"> Jln. Aseloley No.44 Lumajang</p>

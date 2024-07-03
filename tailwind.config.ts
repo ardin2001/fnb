@@ -133,7 +133,12 @@ const config: Config = {
         "18": "repeat(18, minmax(0, 1fr))",
         "19": "repeat(19, minmax(0, 1fr))",
         "20": "repeat(20, minmax(0, 1fr))",
-      }
+      },
+      blur: {
+        "low": "0.5px",
+        "medium": "1px",
+        "high": "2px",
+      },
     },
   },
   plugins: [],

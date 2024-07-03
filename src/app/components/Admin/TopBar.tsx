@@ -3,11 +3,12 @@ import { IoMdMenu } from "react-icons/io";
 import { FaBell } from "react-icons/fa";
 import { FaRegBell } from "react-icons/fa6";
 
-export default function TopBar({classname,setOpen} : {classname : string,setOpen:any}) {
+export default function TopBar({classname,setOpen, title} : {classname : string,setOpen:any, title:string}) {
     return (
         <nav className={classname}>
-            <IoMdMenu className="text-2xl sm:text-3xl text-primary md:hidden" onClick={setOpen} />
-            <div className="profile flex gap-5">
+            <IoMdMenu className="text-2xl sm:text-3xl text-primary lg:hidden" onClick={setOpen} />
+            <h4 className="hidden text-xl font-semibold lg:text-2xl lg:block">{title}</h4>
+            <div className="profile flex gap-2 sm:gap-3 md:gap-4">
                 <FaBell className="text-2xl sm:text-3xl text-primary"/>
                 <div className="avatar p-4 bg-blue-400"></div>
             </div>

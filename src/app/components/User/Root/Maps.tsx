@@ -4,7 +4,7 @@ import { APIProvider, Map, Marker, MapCameraChangedEvent, InfoWindow, } from '@v
 
 const MapVis = () => {
   return (
-    <APIProvider apiKey={process.env.API_KEY || ""}>
+    <APIProvider apiKey={process.env.MAPS_API_KEY || ""}>
       <Map
         style={{ width: '100%', height: '400px' }}
         defaultCenter={{ lat: -8.097987, lng: 113.234853 }}
