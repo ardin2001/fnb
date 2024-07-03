@@ -1,6 +1,5 @@
-"use client";
-import React from 'react';
-import { APIProvider, Map, Marker, MapCameraChangedEvent, InfoWindow, } from '@vis.gl/react-google-maps';
+"use client"
+import { APIProvider, Map, Marker, InfoWindow, } from '@vis.gl/react-google-maps';
 
 const MapVis = () => {
   return (
