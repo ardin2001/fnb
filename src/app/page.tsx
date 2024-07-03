@@ -6,10 +6,10 @@ import { SiNamecheap } from "react-icons/si";
 import { GrServices } from "react-icons/gr";
 // import CardProduct from "./components/User/Root/CardProduct";
 import CardMarket from "./components/User/Root/CardMarket";
-// import Maps from "./components/User/Root/Maps";
-// import { PiBuildingOffice } from "react-icons/pi";
-// import { MdOutlineLocalPostOffice } from "react-icons/md";
-// import { BsTelephone } from "react-icons/bs";
+import Maps from "./components/User/Root/Maps";
+import { PiBuildingOffice } from "react-icons/pi";
+import { MdOutlineLocalPostOffice } from "react-icons/md";
+import { BsTelephone } from "react-icons/bs";
 import Link from "next/link";
 import Theme from "./components/Theme";
 import Banner from "./components/User/Root/Banner";
@@ -86,7 +86,7 @@ export default async function Home() {
         <div className="wrapper-card mt-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {status && data.map((item: any) => <CardProduct key={item.id} product={item} />)}
         </div>
-      </div>
+      </div> */}
       <div className="maps grid gap-5 my-28 w-85/100 md:h-4/5 lg:w-3/4 mx-auto lg:grid-cols-2">
         <div className="caption grid gap-5 sm:gap-6 md:gap-7 lg:gap-8 lg:h-min">
           <div className="description">
@@ -116,7 +116,7 @@ export default async function Home() {
         <div className="maps">
           <Maps />
         </div>
-      </div> */}
+      </div>
       <Theme classname="fixed bottom-2.5 right-2.5 grid place-content-center bg-secondary text-white drop-shadow-strong rounded-full p-2" />
       <Footer />
     </main>
