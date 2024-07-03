@@ -139,6 +139,9 @@ const config: Config = {
         "medium": "1px",
         "high": "2px",
       },
+      boxShadow :{
+        "low": "0 0 4px 4px",
+      }
     },
   },
   plugins: [],

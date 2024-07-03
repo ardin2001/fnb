@@ -2,7 +2,7 @@
 
 export default function Dashboard() {
     return (
-        <aside className="bg-green-300">
+        <aside className="">
             <h1>Dashboard</h1>
         </aside>
     )

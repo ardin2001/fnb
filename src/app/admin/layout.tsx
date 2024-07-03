@@ -22,9 +22,9 @@ export default function DashboardLayout({
 
     return (
         <main className="flex bg-white">
-            <Sidebar classname={`${open ? "left-0 ease-in duration-500 z-50" : "-left-80 ease-out duration-500"} w-64 fixed h-screen bg-red-400 overflow-y-auto lg:w-80 lg:sticky`} />
-            <div className={`${open ? "duration-500 blur-medium" : null} content w-full px-5 sm:px-7 md:px-8 lg:px-0 flex flex-col gap-5`} onClick={HandlerMain}>
-                <TopBar classname="bg-slate-400 flex justify-between" setOpen={() => setOpen((prev: any) => !prev)} title={title} />
+            <Sidebar classname={`${open ? "left-0 ease-in duration-500 z-50" : "-left-80 ease-out duration-500"} w-64 fixed h-screen px-6 py-5 flex flex-col justify-between bg-white shadow-low shadow-gray-300 overflow-y-auto lg:w-80 lg:sticky`} />
+            <div className={`${open ? "duration-500 blur-medium" : null} content w-full px-5 py-3 sm:px-7 sm:py-4 md:px-8 flex flex-col gap-2 sm:gap-2.5 lg:gap-3 lg:blur-none`} onClick={HandlerMain}>
+                <TopBar classname="flex justify-between items-center" setOpen={() => setOpen((prev: any) => !prev)} title={title} />
                 {children}
                 {/* <div className={`${open ? "w-48 ease-in-out duration-500" : "hidden ease-in-out duration-700"} w-0 h-10 bg-red-500`}>coba</div> */}
             </div>

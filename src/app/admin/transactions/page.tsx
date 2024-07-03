@@ -1,9 +1,9 @@
 "use client"
 
-export default function Products() {
+export default function Transactions() {
     return (
         <aside className="">
-            <h1>Products</h1>
+            <h1>Transactions</h1>
         </aside>
     )
 }
