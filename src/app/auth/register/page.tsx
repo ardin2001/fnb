@@ -54,7 +54,7 @@ function Register() {
                             <button type="submit" className="bg-secondary lg:bg-white py-1 mt-1 text-white lg:text-secondary font-bold rounded-md">Login</button>
                         </form>
                         <div>
-                            <p className="text-secondary lg:text-white font-medium text-center">Don't have an account yet? <Link href="/auth/login" className="text-secondary lg:text-white font-bold">Login</Link></p>
+                            <p className="text-secondary lg:text-white font-medium text-center">Don&apos;t have an account yet? <Link href="/auth/login" className="text-secondary lg:text-white font-bold">Login</Link></p>
                             <div className="oauth flex justify-center gap-2 mt-1.5">
                                 <button className="bg-white drop-shadow-login lg:drop-shadow-none lg:bg-white text-white lg:text-secondary font-bold rounded-full p-1.5"><Image src={"/medsos/google.png"} alt="google" width={20} height={20} /></button>
                                 <button className="bg-white drop-shadow-login lg:drop-shadow-none lg:bg-white text-white lg:text-secondary font-bold rounded-full p-1.5"><Image src={"/medsos/fb.png"} alt="fb" width={20} height={20} /></button>
