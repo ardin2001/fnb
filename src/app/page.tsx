@@ -1,16 +1,16 @@
-// import Image from "next/image";
+import Image from "next/image";
 import Navbar from "./components/User/Root/Navbar";
-// import { FaSellsy } from "react-icons/fa";
-// import { MdOutlineFavorite } from "react-icons/md";
-// import { SiNamecheap } from "react-icons/si";
-// import { GrServices } from "react-icons/gr";
+import { FaSellsy } from "react-icons/fa";
+import { MdOutlineFavorite } from "react-icons/md";
+import { SiNamecheap } from "react-icons/si";
+import { GrServices } from "react-icons/gr";
 // import CardProduct from "./components/User/Root/CardProduct";
-// import CardMarket from "./components/User/Root/CardMarket";
+import CardMarket from "./components/User/Root/CardMarket";
 // import Maps from "./components/User/Root/Maps";
 // import { PiBuildingOffice } from "react-icons/pi";
 // import { MdOutlineLocalPostOffice } from "react-icons/md";
 // import { BsTelephone } from "react-icons/bs";
-// import Link from "next/link";
+import Link from "next/link";
 // import Theme from "./components/Theme";
 import Banner from "./components/User/Root/Banner";
 import Footer from "./components/User/Root/Footer";
@@ -29,7 +29,7 @@ export default async function Home() {
   return (
     <main className="bg-low">
       <Navbar />
-      {/* <div className="grid justify-center mt-14 sm:mt-16 lg:mt-20 gap-10 w-85/100 md:h-4/5 lg:w-3/4 mx-auto">
+      <div className="grid justify-center mt-14 sm:mt-16 lg:mt-20 gap-10 w-85/100 md:h-4/5 lg:w-3/4 mx-auto">
         <div className="banner grid sm:grid-cols-2 gap-8 sm:gap-0 md:items-center">
           <div className="left">
             <div className="caption grid gap-2">
@@ -78,7 +78,7 @@ export default async function Home() {
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
           </div>
         </div>
-      </div> */}
+      </div>
       <Banner />
       {/* <div className="product grid lg:gap-2 justify-centersm:py-5 mt-24 sm:mt-32 md:mt-40 lg:mt-48 xl:mt-56 w-85/100 md:h-4/5 lg:w-3/4 mx-auto">
         <h3 className="text-secondary text-lg lg:text-xl font-semibold lg:font-bold text-center">Penjualan Terlaris</h3>
