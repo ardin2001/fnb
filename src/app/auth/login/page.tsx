@@ -11,7 +11,7 @@ function Login() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [message, setMessage] = useState("");
-    const callBack = searchParams.get('callbackUrl') || 'http://localhost:3000/admins/dashboard'
+    const callBack = searchParams.get('callbackUrl') || 'http://localhost:3000/admin/dashboard'
     const HandlerLogin = async (event: any) => {
         event.preventDefault();
         const response: any = await signIn("credentials", {

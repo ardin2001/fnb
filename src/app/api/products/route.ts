@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   GetAllProduct,
   PostProduct,
-  GetProductById,
   GetProductBy,
 } from "@/app/lib/firebase/products";
 import {
@@ -11,16 +10,22 @@ import {
   notImplemented,
   conflict,
 } from "../statusCode";
+
 export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const limits:number = Number(searchParams.get("limit")) || 10;
+  const order = searchParams.get("order");
+  const sort:any = searchParams.get("sort") || "asc";
+  const page:number = Number(searchParams.get("page")) || 1;
   try {
-    const { status, statusCode, data } = await GetAllProduct();
+    let { status, statusCode, data } = await GetAllProduct(order,sort);
     if (status) {
       return NextResponse.json(
         {
           status,
           statusCode,
           message: "Success get all products data",
-          data,
+          data : data.splice((page - 1) * limits, limits),
         },
         {
           status: statusCode,

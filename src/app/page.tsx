@@ -1,24 +1,24 @@
 import Image from "next/image";
-import Navbar from "./components/User/Root/Navbar";
+import Navbar from "./components/Navbar";
 import { FaSellsy } from "react-icons/fa";
 import { MdOutlineFavorite } from "react-icons/md";
 import { SiNamecheap } from "react-icons/si";
 import { GrServices } from "react-icons/gr";
-import CardProduct from "./components/User/Root/CardProduct";
-import CardMarket from "./components/User/Root/CardMarket";
-import Maps from "./components/User/Root/Maps";
+import CardProduct from "./components/CardProduct";
+import CardMarket from "./components/CardMarket";
+import Maps from "./components/Maps";
 import { PiBuildingOffice } from "react-icons/pi";
 import { MdOutlineLocalPostOffice } from "react-icons/md";
 import { BsTelephone } from "react-icons/bs";
 import Link from "next/link";
 import Theme from "./components/Theme";
-import Banner from "./components/User/Root/Banner";
-import Footer from "./components/User/Root/Footer";
+import Banner from "./components/Banner";
+import Footer from "./components/Footer";
 
 async function fetchData() {
   // default : cache : 'force-cache'
   try {
-    const response = await fetch(`${process.env.HOSTNAME_P1}/api/products`, {
+    const response = await fetch(`${process.env.HOSTNAME_P1}/api/products?limit=4&page=1&order=rating&sort=desc`, {
       cache: 'no-store'
     })
     const { status, data } = await response.json()

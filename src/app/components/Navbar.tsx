@@ -1,5 +1,5 @@
 "use client";
-import UseStatus from "../../../hooks/UseStatus";
+import UseStatus from "../hooks/UseStatus";
 import { IoMdMenu } from "react-icons/io";
 
 export default function Navbar() {

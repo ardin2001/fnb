@@ -1,6 +1,6 @@
 "use client"
-import Sidebar from "../components/Admin/Sidebar"
-import TopBar from "../components/Admin/TopBar"
+import Sidebar from "./Sidebar"
+import TopBar from "./TopBar"
 import UseStatus from "../hooks/UseStatus"
 import { useRouter } from "next/navigation"
 import { usePathname } from "next/navigation"

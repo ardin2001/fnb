@@ -9,6 +9,7 @@ import {
   or,
   getDoc,
   updateDoc,
+  orderBy,
 } from "firebase/firestore";
 import App from "./config";
 import { getFirestore } from "firebase/firestore";
@@ -20,7 +21,8 @@ export async function GetProductById(id: any) {
   try {
     const docSnap = await getDoc(doc(db, "products", id));
     if (docSnap.exists()) {
-      return { status: true, statusCode: success, data: docSnap.data() };
+      const data = { id: docSnap.id, ...docSnap.data() };
+      return { status: true, statusCode: success, data };
     }
     return { status: false, statusCode: notFound, data: null };
   } catch {
@@ -67,9 +69,19 @@ export async function PostProduct(dataInput: any) {
   }
 }
 
-export async function GetAllProduct() {
+export async function GetAllProduct( order : any, sort:"asc" | "desc") {
+  const createQuery = (db:any, order:any, sort:"asc" | "desc") => {
+    let q;
+    if (order) {
+      q = query(collection(db, "products"), orderBy(order, sort));
+    } else {
+      q = query(collection(db, "products"),);
+    }
+    return q;
+  };
   try {
-    const querySnapshot = await getDocs(collection(db, "products"));
+    const q = createQuery(db, order, sort);
+    const querySnapshot = await getDocs(q);
     const response: any = querySnapshot.docs.map((doc) => {
       return {
         id: doc.id,

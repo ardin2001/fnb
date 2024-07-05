@@ -3,12 +3,11 @@ import {
   doc,
   setDoc,
   query,
-  where,
   getDocs,
   deleteDoc,
-  or,
   getDoc,
   updateDoc,
+  orderBy,
 } from "firebase/firestore";
 import App from "./config";
 import { getFirestore } from "firebase/firestore";
@@ -16,9 +15,9 @@ import { success, notFound, notImplemented } from "@/app/api/statusCode";
 
 const db = getFirestore(App);
 
-export async function GetUserById(id: any) {
+export async function GetOrderById(id: any) {
   try {
-    const docSnap = await getDoc(doc(db, "users", id));
+    const docSnap = await getDoc(doc(db, "orders", id));
     if (docSnap.exists()) {
       const data = { id: docSnap.id, ...docSnap.data() };
       return { status: true, statusCode: success, data };
@@ -29,48 +28,28 @@ export async function GetUserById(id: any) {
   }
 }
 
-export async function GetUserBy(inputUser: any) {
+export async function PostOrder(dataInput: any) {
   try {
-    const q = query(
-      collection(db, "users"),
-      or(
-        where("email", "==", inputUser.email)
-        //   where("fullname", "==", inputUser.fullname)
-      )
-    );
-    try {
-      const querySnapshot = await getDocs(q);
-      const response: any = querySnapshot.docs.map((doc) => {
-        return {
-          id: doc.id,
-          ...doc.data(),
-        };
-      });
-
-      if (response.length == 0) {
-        return { status: false, statusCode: notFound, data: null };
-      }
-      return { status: true, statusCode: success, data: response[0] };
-    } catch {
-      return { status: false, statusCode: notImplemented, data: null };
-    }
-  } catch {
-    return { status: false, statusCode: notImplemented, data: null };
-  }
-}
-
-export async function PostUser(dataInput: any) {
-  try {
-    await setDoc(doc(collection(db, "users")), dataInput);
+    await setDoc(doc(collection(db, "orders")), dataInput);
     return { status: true, statusCode: success };
   } catch {
     return { status: false, statusCode: notImplemented };
   }
 }
 
-export async function GetAllUser() {
+export async function GetAllOrder(order: any, sort: "asc" | "desc") {
+  const createQuery = (db: any, order: any, sort: "asc" | "desc") => {
+    let q;
+    if (order) {
+      q = query(collection(db, "orders"), orderBy(order, sort));
+    } else {
+      q = query(collection(db, "orders"));
+    }
+    return q;
+  };
   try {
-    const querySnapshot = await getDocs(collection(db, "users"));
+    const q = createQuery(db, order, sort);
+    const querySnapshot = await getDocs(q);
     const response: any = querySnapshot.docs.map((doc) => {
       return {
         id: doc.id,
@@ -84,16 +63,16 @@ export async function GetAllUser() {
   }
 }
 
-export async function DeleteUser(id: any) {
+export async function DeleteOrder(id: any) {
   try {
-    await deleteDoc(doc(db, "users", id));
+    await deleteDoc(doc(db, "orders", id));
     return { status: true, statusCode: success };
   } catch {
     return { status: false, statusCode: notImplemented };
   }
 }
 
-export async function UpdateUser({
+export async function UpdateOrder({
   id,
   dataUpdate,
 }: {
@@ -101,7 +80,7 @@ export async function UpdateUser({
   dataUpdate: any;
 }) {
   try {
-    await updateDoc(doc(db, "users", id), dataUpdate);
+    await updateDoc(doc(db, "orders", id), dataUpdate);
     return { status: true, statusCode: success };
   } catch {
     return { status: false, statusCode: notImplemented };
