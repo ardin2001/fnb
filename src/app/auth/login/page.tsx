@@ -6,12 +6,15 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from 'react'
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 function Login() {
     const router = useRouter();
     const searchParams = useSearchParams();
+    const pathname = usePathname();
     const [message, setMessage] = useState("");
-    const callBack = searchParams.get('callbackUrl') || 'http://localhost:3000/admin/dashboard'
+    const callBack = searchParams.get('callbackUrl') || 'http://localhost:3000'
+    const session = useSession();
     const HandlerLogin = async (event: any) => {
         event.preventDefault();
         const response: any = await signIn("credentials", {
@@ -22,8 +25,20 @@ function Login() {
         });
 
         if (response.ok) {
+            const user : any = session.data?.user
             setMessage("Login success")
-            router.push(callBack)
+            if(user.role == "user"){
+                if(callBack.split("/")[3] == "user"){
+                    router.push(callBack)
+                }
+                router.push("/user")
+            }
+            else if(user.role == "admin"){
+                if(callBack.split("/")[3] == "admin"){
+                    router.push(callBack)
+                }
+                router.push("/admin/dashboard")
+            }
         } else {
             setMessage("Wrong email or password")
         }

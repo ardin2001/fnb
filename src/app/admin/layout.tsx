@@ -14,7 +14,6 @@ export default function DashboardLayout({
     const arrPathname = pathname.split("/")
     const title = Capitalize(arrPathname[2])
     const [open, setOpen]: any = UseStatus()
-    console.log("open", open)
     const HandlerMain = () => {
         if (open) {
             setOpen()
