@@ -15,7 +15,7 @@ function Login() {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const [message, setMessage] = UseMessage();
-    const callBack = searchParams.get('callbackUrl') || 'http://localhost:3000'
+    const callBack = searchParams.get('callbackUrl') || process.env.HOSTNAME_P1
     const session = useSession();
     const HandlerLogin = async (event: any) => {
         event.preventDefault();
@@ -26,20 +26,22 @@ function Login() {
             callbackUrl: callBack
         });
 
+        console.log("response page:", response)
+
         if (response.ok) {
-            const user: any = session.data?.user
-            if (user.role == "user") {
-                if (callBack.split("/")[3] == "user") {
-                    router.push(callBack)
-                }
-                router.push("/user")
-            }
-            else if (user.role == "admin") {
-                if (callBack.split("/")[3] == "admin") {
-                    router.push(callBack)
-                }
-                router.push("/admin/dashboard")
-            }
+            // const user: any = session.data?.user
+            // if (user.role == "user") {
+            //     if (callBack.split("/")[3] == "user") {
+            //         router.push(callBack)
+            //     }
+            //     router.push("/user")
+            // }
+            // else if (user.role == "admin") {
+            //     if (callBack.split("/")[3] == "admin") {
+            //         router.push(callBack)
+            //     }
+            //     router.push("/admin/dashboard")
+            // }
         } else {
             setMessage("Wrong email or password")
         }

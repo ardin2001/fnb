@@ -11,7 +11,7 @@ function Register() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [message, setMessage] = useState("");
-    const callBack = searchParams.get('callbackUrl') || 'http://localhost:3000'
+    const callBack : any = searchParams.get('callbackUrl') || process.env.HOSTNAME_P1
     const HandlerRegister = async (event: any) => {
         event.preventDefault();
         const response: any = await signIn("credentials", {
@@ -22,7 +22,6 @@ function Register() {
         });
 
         if (response.ok) {
-            setMessage("Login success")
             router.push(callBack)
         } else {
             setMessage("Wrong email or password")

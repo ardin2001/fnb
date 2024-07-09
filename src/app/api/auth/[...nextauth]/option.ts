@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials: any) {
         const { email, password } = credentials;
-        const response = await fetch("http://localhost:3000/api/auth/login", {
+        const response = await fetch(`${process.env.HOSTNAME_P1}/api/auth/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -28,6 +28,7 @@ export const authOptions: NextAuthOptions = {
           body: JSON.stringify({ email, password }),
         });
         const { status, data }: any = await response.json();
+        console.log("response option status:", status);
         if (status) {
           return data;
         }
