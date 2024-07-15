@@ -29,19 +29,19 @@ function Login() {
         console.log("response page:", response)
 
         if (response.ok) {
-            // const user: any = session.data?.user
-            // if (user.role == "user") {
-            //     if (callBack.split("/")[3] == "user") {
-            //         router.push(callBack)
-            //     }
-            //     router.push("/user")
-            // }
-            // else if (user.role == "admin") {
-            //     if (callBack.split("/")[3] == "admin") {
-            //         router.push(callBack)
-            //     }
-            //     router.push("/admin/dashboard")
-            // }
+            const user: any = session.data?.user
+            if (user.role == "user") {
+                if (callBack?.split("/")[3] == "user") {
+                    router.push(callBack)
+                }
+                router.push("/user")
+            }
+            else if (user.role == "admin") {
+                if (callBack?.split("/")[3] == "admin") {
+                    router.push(callBack)
+                }
+                router.push("/admin/dashboard")
+            }
         } else {
             setMessage("Wrong email or password")
         }

@@ -26,7 +26,6 @@ export default function DashboardLayout({
             <div className={`${open ? "duration-500 blur-medium" : null} content w-full px-5 py-3 sm:px-7 sm:py-4 md:px-8 flex flex-col gap-2 sm:gap-2.5 lg:gap-3 lg:blur-none`} onClick={HandlerMain}>
                 <TopBar classname="flex justify-between items-center" setOpen={() => setOpen((prev: any) => !prev)} title={title} />
                 {children}
-                {/* <div className={`${open ? "w-48 ease-in-out duration-500" : "hidden ease-in-out duration-700"} w-0 h-10 bg-red-500`}>coba</div> */}
             </div>
         </main>
     )
