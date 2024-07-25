@@ -2,21 +2,37 @@
 import Image from "next/image";
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from 'react'
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import ModalMessage from "@/app/components/ModalMessage";
 import UseMessage from "@/app/hooks/UseMessage";
 
 function Login() {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const pathname = usePathname();
     const [message, setMessage] = UseMessage();
     const callBack = searchParams.get('callbackUrl') || process.env.HOSTNAME_P1
     const session = useSession();
+    
+    useEffect(() => {
+        if (session.status == "authenticated") {
+            const user: any = session.data?.user
+            if (user.role == "user") {
+                if (callBack?.split("/")[3] == "user") {
+                    router.push(callBack)
+                }
+                router.push("/users")
+            }
+            else if (user.role == "admin") {
+                if (callBack?.split("/")[3] == "admin") {
+                    router.push(callBack)
+                }
+                router.push("/admins/dashboard")
+            }
+        }
+    },[session])
     const HandlerLogin = async (event: any) => {
         event.preventDefault();
         const response: any = await signIn("credentials", {
@@ -26,23 +42,7 @@ function Login() {
             callbackUrl: callBack
         });
 
-        console.log("response page:", response)
-
-        if (response.ok) {
-            const user: any = session.data?.user
-            if (user.role == "user") {
-                if (callBack?.split("/")[3] == "user") {
-                    router.push(callBack)
-                }
-                router.push("/user")
-            }
-            else if (user.role == "admin") {
-                if (callBack?.split("/")[3] == "admin") {
-                    router.push(callBack)
-                }
-                router.push("/admin/dashboard")
-            }
-        } else {
+        if(response.ok == false) {
             setMessage("Wrong email or password")
         }
     }

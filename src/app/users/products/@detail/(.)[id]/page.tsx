@@ -10,7 +10,7 @@ export default function ProductDetail() {
                         <FaStar className="text-secondary text-xl" />
                         <p className="text-secondary font-medium">4.5</p>
                     </div>
-                    <Image src="https://images.unsplash.com/photo-1645696301019-35adcc18fc21?q=80&w=1929&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="products" width={5000} height={5000} className="h-48 md:h-52 xl:h-56 object-cover" />
+                    <Image src="/logo-login.png" alt="products" width={5000} height={5000} className="h-48 md:h-52 xl:h-56 object-cover" />
                     <h2 className="card-title text-secondary font-semibold text-lg">Lorem ipsum dolor</h2>
                     <p className="text-secondary">{description.length > 70 ? description.substring(0, 70) + "..." : description}</p>
                     <p className="mt-2 md:mt-3 xl:mt-4 text-white font-semibold bg-secondary py-0.5 px-3 rounded-md w-min justify-self-end">500000</p>

@@ -28,7 +28,7 @@ export const authOptions: NextAuthOptions = {
           body: JSON.stringify({ email, password }),
         });
         const { status, data }: any = await response.json();
-        console.log("response option status:", status);
+        console.log("response option status:", status,data);
         if (status) {
           return data;
         }
@@ -83,6 +83,7 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, user, token }: any) {
+      console.log("session option:", token);
       if (token != undefined && "id" in token) {
         session.user.id = token.id;
       }
@@ -98,6 +99,7 @@ export const authOptions: NextAuthOptions = {
       if (token != undefined && "provider" in token) {
         session.user.provider = token.provider;
       }
+      console.log("session return:", session);
       return session;
     },
   },
