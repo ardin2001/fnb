@@ -1,7 +1,10 @@
 "use client"
 import Link from "next/link"
+import { useSelector } from "react-redux"
 
 export default function Dashboard() {
+    const products = useSelector((state: any) => state.products)
+    console.log(products)
     return (
         <aside className="">
             <h1>Dashboard</h1>

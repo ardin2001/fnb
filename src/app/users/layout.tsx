@@ -1,11 +1,11 @@
+"use client";
+import WrapperRedux from "../wrapper/WrapperRedux";
 export default function Layout(props: {
-    coba: React.ReactNode;
-    children: React.ReactNode;
-  }) {
-    return (
-      <>
-        {props.coba}
-        {props.children}
-      </>
-    );
-  }
+  children: React.ReactNode;
+}) {
+  return (
+    <WrapperRedux>
+      {props.children}
+    </WrapperRedux>
+  );
+}

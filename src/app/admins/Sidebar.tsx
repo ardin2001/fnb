@@ -11,7 +11,7 @@ import { usePathname } from "next/navigation";
 export default function Sidebar({ classname, setOpen }: { classname: string, setOpen :any }) {
     const pathname = usePathname();
     return (
-        <aside className={classname}>
+        <aside className={`${classname}`}>
             <div className="grid gap-16">
                 <div className="head-sidebar flex items-center">
                     <div className="icon w-10"><Image src="/medsos/twitter.png" alt="logo" width={1000} height={1000} /></div>
