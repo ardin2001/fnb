@@ -1,28 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = [
-  { id: 1, text: "Item 1" },
-  { id: 2, text: "Item 2" },
-];
-
 const itemsSlice = createSlice({
   name: "products",
-  initialState,
+  initialState : [],
   reducers: {
+    setItems: (state: any, action: any) => {
+      // state = action.payload;
+      // state.push(action.payload);
+      return state = action.payload;
+    },
     addItem: (state: any, action: any) => {
-      state.items.push(action.payload);
+      state.push(action.payload);
     },
     removeItem: (state: any, action: any) => {
-      state.items = state.items.filter(
+      state = state.filter(
         (item: any) => item.id !== action.payload
       );
     },
     updateItem: (state: any, action: any) => {
-      const index = state.items.findIndex(
+      const index = state.findIndex(
         (item: any) => item.id === action.payload.id
       );
       if (index !== -1) {
-        state.items[index] = action.payload;
+        state[index] = action.payload;
       }
     },
   },
