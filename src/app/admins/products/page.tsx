@@ -6,8 +6,9 @@ import { actions } from "@/app/store/admin/productSlice"
 import { getProducts } from "@/app/lib/fetch/fetchProducts"
 import Image from "next/image"
 import { useSearchParams, useRouter } from 'next/navigation'
+import { Suspense } from 'react'
 
-export default function Products() {
+function Products() {
     const dispatch = useDispatch()
     const searchParams = useSearchParams()
     const router = useRouter()
@@ -91,3 +92,12 @@ export default function Products() {
         </aside>
     )
 }
+
+export default function WrapperProducts() {
+    return (
+      // You could have a loading skeleton as the `fallback` too
+      <Suspense>
+        <Products />
+      </Suspense>
+    )
+  }
