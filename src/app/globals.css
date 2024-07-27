@@ -7,3 +7,23 @@
   padding: 0;
   box-sizing: border-box;
 }
+@layer utilities {
+  /* Untuk Chrome, Edge, dan Safari */
+  .scrollbar-transparent::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  .scrollbar-transparent::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-transparent::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    border: 1px solid transparent;
+  }
+  .scrollbar-transparent {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+  }
+}

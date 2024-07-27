@@ -25,6 +25,7 @@ export async function GET(req: NextRequest) {
           status,
           statusCode,
           message: "Success get all products data",
+          page: page,
           data : data.splice((page - 1) * limits, limits),
         },
         {
