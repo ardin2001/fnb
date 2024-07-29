@@ -2,16 +2,17 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useDispatch, useSelector } from "react-redux"
-import { actions } from "@/app/store/admin/productSlice"
+import { actions } from "@/app/redux/admin/productSlice"
 import { getProducts } from "@/app/lib/fetch/fetchProducts"
 import Image from "next/image"
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Suspense } from 'react'
+import Pagination from "./pagination"
+import { CiFilter } from "react-icons/ci";
 
 function Products() {
     const dispatch = useDispatch()
     const searchParams = useSearchParams()
-    const router = useRouter()
     const page = searchParams.get('page')
     const order = searchParams.get('order')
     const sort = searchParams.get('sort')
@@ -28,17 +29,16 @@ function Products() {
         }).catch((e) => console.log(e))
     }, [])
 
-    const coba = () => {
-        console.log("coba")
-    }
     return (
-        <aside className="flex flex-col gap-2 sm:gap-3 md:gap-4 xl:gap-5">
-            <button onClick={coba}>coba</button>
-            <div className="flex justify-between mt-4 md:mt-5">
+        <aside className="flex flex-col gap-2 sm:gap-3">
+            <div className="flex justify-between mt-3 md:mt-3 mb-1.5 md:mb-2">
                 <div className="input w-1/2 lg:w-2/5">
                     <input type="text" placeholder="Search here..." className="outline-none border-1.5 border-secondary px-3 py-1.5 w-full lg:py-2 rounded-md text-sm" />
                 </div>
-                <Link href="/admins/products/add" className="text-white text-sm sm:text-base bg-secondary py-1.5 px-5 rounded-md">Add Product</Link>
+                <div className="right flex gap-2 lg:gap-2.5">
+                    <CiFilter className="text-4xl font-bold bg-secondary text-white self-baseline" onClick={() => console.log("filter")} />
+                    <Link href="/admins/products/add" className="text-white text-sm sm:text-base bg-secondary py-1.5 lg:py-2 px-5 rounded-md">Add Product</Link>
+                </div>
             </div>
             <div className="tabel bg-white px-4 py-4 max-h-99 overflow-auto scrollbar-transparent">
                 <table className="table-auto w-full rounded-lg">
@@ -89,15 +89,16 @@ function Products() {
                     </tbody>
                 </table>
             </div>
+            {status ? <Pagination /> : null}
         </aside>
     )
 }
 
 export default function WrapperProducts() {
     return (
-      // You could have a loading skeleton as the `fallback` too
-      <Suspense>
-        <Products />
-      </Suspense>
+        // You could have a loading skeleton as the `fallback` too
+        <Suspense>
+            <Products />
+        </Suspense>
     )
-  }
+}

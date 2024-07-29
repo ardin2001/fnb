@@ -1,11 +1,11 @@
 "use client"
 import Sidebar from "./Sidebar"
 import TopBar from "./TopBar"
-import UseStatus from "../hooks/UseStatus"
+import useStatus from "../hooks/useStatus"
 import { useRouter } from "next/navigation"
 import { usePathname } from "next/navigation"
 import Capitalize from "../function/Capitalize"
-import storeAdmin from "../store/admin/store"
+import storeAdmin from "../redux/admin/store"
 import { Provider } from "react-redux"
 
 export default function DashboardLayout({
@@ -15,7 +15,7 @@ export default function DashboardLayout({
     const pathname = usePathname()
     const arrPathname = pathname.split("/")
     const title = Capitalize(arrPathname[2])
-    const [open, setOpen]: any = UseStatus()
+    const [open, setOpen]: any = useStatus()
     const HandlerMain = () => {
         if (open) {
             setOpen()

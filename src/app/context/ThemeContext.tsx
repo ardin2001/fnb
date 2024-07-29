@@ -1,10 +1,10 @@
 'use client'
 import { createContext } from 'react'
-import UseStatus from '../hooks/UseStatus'
+import useStatus from '../hooks/useStatus';
 
 const ThemeContext = createContext({})
 function ThemeContextProvider({ children }: any) {
-    const [theme, setTheme] = UseStatus();
+    const [theme, setTheme] = useStatus();
     return (
         <ThemeContext.Provider value={{ theme, setTheme }}>
             {children}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-export default function UseInput() {
+export default function useInput() {
   const [status, setStatus] = useState(false);
   const HandlerStatus = (e:any) => {
     setStatus((prev) => !prev);

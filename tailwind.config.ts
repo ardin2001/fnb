@@ -168,6 +168,9 @@ const config: Config = {
         "advanced": "0 0 6px 6px rgb(46, 46, 46,0.4)",
         "sidebar": "0 0 3px 3px rgb(46, 46, 46, 0.10)",
       },
+      borderRadius: {
+        "all" : "100%",
+      }
     },
   },
   plugins: [],

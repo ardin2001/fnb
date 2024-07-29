@@ -1,9 +1,9 @@
 "use client";
-import UseStatus from "../hooks/UseStatus";
+import useStatus from "../hooks/useStatus";
 import { IoMdMenu } from "react-icons/io";
 
 export default function Navbar() {
-    const [status, setStatus]: any = UseStatus();
+    const [status, setStatus]: any = useStatus();
 
     return (
         <div className="bg-white grid py-2.5 md:grid-flow-col md:grid-cols-3 md:items-center px-6 sm:px-10 md:px-16 lg:px-24 xl:px-36 mx-auto drop-shadow-low sticky top-0 z-50">

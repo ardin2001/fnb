@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense } from 'react'
 import Link from "next/link";
 import ModalMessage from "@/app/components/ModalMessage";
-import UseMessage from "@/app/hooks/UseMessage";
+import UseMessage from "@/app/hooks/useMessage";
 
 function Login() {
     const router = useRouter();
