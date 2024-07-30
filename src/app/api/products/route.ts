@@ -15,10 +15,14 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const limits:number = Number(searchParams.get("limit")) || 10;
   const order = searchParams.get("order");
+  const category = searchParams.get("category");
   const sort:any = searchParams.get("sort") || "asc";
   const page:number = Number(searchParams.get("page")) || 1;
   try {
     let { status, statusCode, data } = await GetAllProduct(order,sort);
+    if (category) {
+      data = data.splice((page - 1) * limits, limits).filter((product: any) => product.category === category)
+    }
     if (status) {
       return NextResponse.json(
         {
@@ -26,7 +30,7 @@ export async function GET(req: NextRequest) {
           statusCode,
           message: "Success get all products data",
           page: page,
-          data : data.splice((page - 1) * limits, limits),
+          data : data,
         },
         {
           status: statusCode,

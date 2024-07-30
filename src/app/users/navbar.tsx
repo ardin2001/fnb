@@ -1,13 +1,13 @@
 "use client";
 import useStatus from "../hooks/useStatus";
 import { IoMdMenu } from "react-icons/io";
-import hookSession from "../hooks/useSession";
+import useWrapperSession from "../hooks/useSession";
 import { FaRegUser } from "react-icons/fa";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
 
 export default function NavbarUser() {
     const [status, setStatus]: any = useStatus();
-    const session = hookSession();
+    const session = useWrapperSession();
     console.log(session)
 
     return (

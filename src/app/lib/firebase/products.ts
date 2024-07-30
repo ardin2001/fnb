@@ -10,6 +10,7 @@ import {
   getDoc,
   updateDoc,
   orderBy,
+  limit,
 } from "firebase/firestore";
 import App from "./config";
 import { getFirestore } from "firebase/firestore";
@@ -69,7 +70,10 @@ export async function PostProduct(dataInput: any) {
   }
 }
 
-export async function GetAllProduct( order : any, sort:"asc" | "desc") {
+export async function GetAllProduct(
+  order: any,
+  sort: "asc" | "desc",
+) {
   const createQuery = (db:any, order:any, sort:"asc" | "desc") => {
     let q;
     if (order) {
