@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Navbar from "./components/Navbar";
 import { FaSellsy } from "react-icons/fa";
 import { MdOutlineFavorite } from "react-icons/md";
 import { SiNamecheap } from "react-icons/si";
@@ -14,6 +13,7 @@ import Link from "next/link";
 import Theme from "./components/Theme";
 import Banner from "./components/Banner";
 import Footer from "./components/Footer";
+import Discount from "./components/Discount";
 
 async function fetchData() {
   // default : cache : 'force-cache'
@@ -32,7 +32,6 @@ export default async function Home() {
   const { status, data } = await fetchData()
   return (
     <main className="bg-low">
-      <Navbar />
       <div className="grid justify-center mt-14 sm:mt-16 lg:mt-20 gap-10 w-85/100 md:h-4/5 lg:w-3/4 mx-auto">
         <div className="banner grid sm:grid-cols-2 gap-8 sm:gap-0 md:items-center">
           <div className="left">
@@ -121,7 +120,8 @@ export default async function Home() {
           <Maps />
         </div>
       </div>
-      <Theme classname="fixed bottom-2.5 right-2.5 grid place-content-center bg-secondary text-white drop-shadow-strong rounded-full p-2" />
+      <Discount />
+      <Theme classname="fixed bottom-2.5 right-2.5 grid place-content-center bg-secondary text-white shadow-furdamental rounded-full p-2" />
       <Footer />
     </main>
   );

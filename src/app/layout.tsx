@@ -4,6 +4,7 @@ import "./globals.css";
 import WrapperSession from "./wrapper/WrapperSession";
 import SidebarContextProvider from "./context/SidebarContext";
 import ThemeContextProvider from "./context/ThemeContext";
+import Navbar from "./components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <WrapperSession>
           <SidebarContextProvider>
             <ThemeContextProvider>
+            <Navbar />
             {children}
             </ThemeContextProvider>
           </SidebarContextProvider>

@@ -21,7 +21,9 @@ export async function GET(req: NextRequest) {
   try {
     let { status, statusCode, data } = await GetAllProduct(order,sort);
     if (category) {
-      data = data.splice((page - 1) * limits, limits).filter((product: any) => product.category === category)
+      data = data.filter((product: any) => product.category === category).splice((page - 1) * limits, ((page - 1) * limits)+limits)
+    }else if(limits || page){
+      data = data.splice((page - 1) * limits, ((page - 1) * limits)+limits)
     }
     if (status) {
       return NextResponse.json(
@@ -30,7 +32,7 @@ export async function GET(req: NextRequest) {
           statusCode,
           message: "Success get all products data",
           page: page,
-          data : data,
+          data,
         },
         {
           status: statusCode,

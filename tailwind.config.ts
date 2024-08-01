@@ -170,7 +170,7 @@ const config: Config = {
       },
       borderRadius: {
         "all" : "100%",
-      }
+      },
     },
   },
   plugins: [],
