@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="footer grid gap-20 bg-gradient-to-t from-secondary text-black text-opacity-80 py-10 px-6 sm:px-10 md:px-16 lg:px-24 xl:px-36 mx-auto">
+        <footer className="footer grid gap-20 bg-gradient-to-t from-secondary text-black text-opacity-80 py-10 px-6 sm:px-8 md:px-10 lg:px-12 xl:px-14 mx-auto">
             <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
                 <div className="info">
                     <h3 className="text-3xl font-semibold">Soul Cafe</h3>

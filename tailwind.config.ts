@@ -163,6 +163,7 @@ const config: Config = {
         "high": "2px",
       },
       boxShadow :{
+        "basic": "0 0 3px 2px rgb(46, 46, 46, 0.15)",
         "furdamental": "0 0 4px 3px rgb(46, 46, 46, 0.2)",
         "intermediate": "0 0 8px 5px rgb(46, 46, 46,0.45)",
         "advanced": "0 0 6px 6px rgb(46, 46, 46,0.4)",
