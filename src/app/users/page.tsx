@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "../components/Footer";
-import { FaWhatsapp } from "react-icons/fa";
 import CardProduct from "./cardProduct";
 import { IoFlash } from "react-icons/io5";
 
@@ -98,16 +97,12 @@ export default async function Home() {
           </div>
         </div>
       </div>
-      {/* <div className="reservation mt-16 sm:mt-20 md:mt-28 h-44 bg-tertiary mx-6 sm:mx-8 md:mx-10 lg:mx-12 xl:mx-14 grid md:grid-cols-2">
-        <Image src="/cafe.avif" alt="reservation" width={1000} height={1000} className="w-96 h-80 object-cover" />
-        <div className="caption">
-          <h3>Reservation</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere cupiditate quibusdam dicta.</p>
-          <div className="btn-wa">
-            <Link href="https://wa.me/6289530522228" className="py-1 lg:py-2 rounded-lg text-white border-2 border-white font-semibold w-min px-4 lg:px-5 flex items-center gap-1 sm:gap-1.5"><FaWhatsapp /> whatsapp</Link>
+      <div className="product mt-12 sm:mt-14 md:mt-16 xl:mt-20 px-6 sm:px-8 md:px-10 lg:px-12 xl:px-14 mb-10 sm:mb-12 md:mb-14 xl:mb-16">
+          <h3 className="text-secondary text-lg lg:text-xl xl:text-2xl font-semibold lg:font-bold ">Products</h3>
+          <div className="wrapper-card mt-4 flex flex-wrap justify-center gap-2.5 sm:gap-3.5 md:gap-4 xl:gap-5">
+            {status && data.map((item: any) => <CardProduct key={item.id} product={item} />)}
           </div>
         </div>
-      </div> */}
       <Footer />
     </main>
   );

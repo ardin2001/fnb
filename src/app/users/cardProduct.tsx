@@ -4,9 +4,9 @@ import Link from "next/link";
 
 export default function CardProduct({product}:any) {
     return (
-        <Link href="/user/products/1" className="card bg-base-100 drop-shadow-strong p-2 bg-white cursor-pointer w-72">
+        <Link href="/user/products/1" className="card bg-base-100 drop-shadow-strong p-2 bg-white cursor-pointer w-56 md:w-54">
             <div className="card-body grid gap-1 relative">
-                <div className="rating flex gap-1 px-1.5 py-0.5 bg-white rounded-md absolute right-2 top-2 border-2 border-secondary">
+                <div className="rating flex gap-1 px-1.5 py-0.5 bg-white absolute right-2 top-2 border-2 border-secondary">
                     <FaStar className="text-secondary text-xl" />
                     <p className="text-secondary font-medium">{product.rating}</p>
                 </div>
