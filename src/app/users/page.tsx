@@ -93,7 +93,7 @@ export default async function Home() {
         </div>
         <div className="product-discount overflow-auto w-full">
           <div className="flex w-max">
-            {data.map((item: any) => <CardProduct key={item.id} product={item} />)}
+            {status && data.map((item: any) => <CardProduct key={item.id} product={item} />)}
           </div>
         </div>
       </div>
