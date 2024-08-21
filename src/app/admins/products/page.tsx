@@ -9,6 +9,7 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import { Suspense } from 'react'
 import Pagination from "./pagination"
 import { CiFilter } from "react-icons/ci";
+import {getProduct} from '@/app/redux/admin/productSlice'
 
 function Products() {
     const dispatch = useDispatch()
@@ -17,16 +18,16 @@ function Products() {
     const order = searchParams.get('order')
     const sort = searchParams.get('sort')
     const products = useSelector((state: any) => state.products)
-    const [status, setStatus]: any = useState()
     useEffect(() => {
-        getProducts({ page, order, sort }).then(({ status, data, message }) => {
-            if (status) {
-                dispatch(actions.setItems(data))
-            } else {
-                console.log(message)
-            }
-            setStatus(status)
-        }).catch((e) => console.log(e))
+        // getProducts({ page, order, sort }).then(({ status, data, message }) => {
+        //     if (status) {
+        //         dispatch(actions.setItems(data))
+        //     } else {
+        //         console.log(message)
+        //     }
+        //     setStatus(status)
+        // }).catch((e) => console.log(e))
+        dispatch(getProduct())
     }, [])
 
     return (
@@ -54,13 +55,13 @@ function Products() {
                         </tr>
                     </thead>
                     <tbody className="text-center">
-                        {status ? (
-                            products.length == 0 ? (
+                        {products.status ? (
+                            products.data.length == 0 ? (
                                 <tr className="relative h-10">
                                     <td className="py-1.5 absolute left-1/2 -translate-x-1/2 top-2 text-blue-500 text-xl font-semibold">No Data</td>
                                 </tr>
                             ) : (
-                                products.map((product: any, index: number) => {
+                                products.data.map((product: any, index: number) => {
                                     return (
                                         <tr key={product.id} className={`${(index + 1) % 2 == 0 ? "bg-gray-100" : "bg-white"}`}>
                                             <td className="py-1.5">{index + 1}</td>
@@ -89,7 +90,7 @@ function Products() {
                     </tbody>
                 </table>
             </div>
-            {status ? <Pagination /> : null}
+            {products.status ? <Pagination /> : null}
         </aside>
     )
 }
