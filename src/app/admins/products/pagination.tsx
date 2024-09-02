@@ -12,17 +12,7 @@ export default function Pagination() {
   const searchParams = useSearchParams()
   const page: any = searchParams.get('page') || 1
   const products = useSelector((state: any) => state.products)
-  const dispatch = useDispatch()
 
-  useEffect(() => {
-    getProducts({ page }).then(({ status, data, message }) => {
-      if (status) {
-        dispatch(actions.setItems(data))
-      } else {
-        console.log(message)
-      }
-    })
-  },[page])
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString())
@@ -35,9 +25,9 @@ export default function Pagination() {
 
   return (
     <div className="flex gap-2 justify-end h-max">
-      {page != 1 ? <Link className="flex items-center text-xs justify-center px-2.5 py-2 bg-secondary text-white font-semibold rounded-md" href={pathname + '?' + createQueryString('page', (parseInt(page) - 1).toString())}><FaAngleLeft /></Link> : null}
-      <Link className="flex items-center text-xs justify-center px-3.5 py-2 bg-secondary text-white font-semibold rounded-md" href={pathname + '?' + createQueryString('page', page)}>{page}</Link>
-      {products.length == 10 ? <Link className="flex items-center text-xs justify-center px-2 py-2 bg-secondary text-white font-semibold rounded-md" href={pathname + '?' + createQueryString('page', (parseInt(page) + 1).toString())}><FaAngleRight /></Link> : null}
+      {page != 1 ? <Link className="hover:bg-primary flex items-center text-xs justify-center px-2.5 py-2 bg-secondary text-white font-semibold rounded-md" href={pathname + '?' + createQueryString('page', (parseInt(page) - 1).toString())}><FaAngleLeft /></Link> : null}
+      <Link className="hover:bg-primary flex items-center text-xs justify-center px-3.5 py-2 bg-secondary text-white font-semibold rounded-md" href={pathname + '?' + createQueryString('page', page)}>{page}</Link>
+      {products.data.length == 10 ? <Link className="hover:bg-primary flex items-center text-xs justify-center px-2 py-2 bg-secondary text-white font-semibold rounded-md" href={pathname + '?' + createQueryString('page', (parseInt(page) + 1).toString())}><FaAngleRight /></Link> : null}
     </div>
   )
 }

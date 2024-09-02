@@ -23,7 +23,6 @@ export default function Sidebar({ classname, setOpen }: { classname: string, set
                     <Link onClick={setOpen} href="/admins/users" className={`${pathname === "/admins/users" ? "bg-medium border-l-4 border-secondary" : null} hover:border-l-4 border-secondary`}><p className="pl-4 py-2.5 flex gap-2 text-secondary font-semibold text-lg items-center"><FaRegUser />Users</p></Link>
                     <Link onClick={setOpen} href="/admins/orders" className={`${pathname === "/admins/orders" ? "bg-medium border-l-4 border-secondary" : null} hover:border-l-4 border-secondary`}><p className="pl-4 py-2.5 flex gap-2 text-secondary font-semibold text-lg items-center"><RiMoneyDollarBoxLine />Orders</p></Link>
                     <Link onClick={setOpen} href="/admins/transactions" className={`${pathname === "/admins/transactions" ? "bg-medium border-l-4 border-secondary" : null} hover:border-l-4 border-secondary`}><p className="pl-4 py-2.5 flex gap-2 text-secondary font-semibold text-lg items-center"><AiOutlineTransaction />Transactions</p></Link>
-
                 </div>
             </div>
             <button className="logout font-semibold bg-secondary text-white rounded-md py-2 text-center">Logout</button>

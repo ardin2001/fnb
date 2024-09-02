@@ -1,11 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const getProduct:any = createAsyncThunk("data/fetchProduct", async () => {
-  const response = await fetch("/api/products");
-  const { data } = await response.json();
-  return data;
-});
+const getProduct: any = createAsyncThunk(
+  "data/fetchProduct",
+  async (inputUser: any, thunkAPI) => {
+    try {
+      const res = await fetch(
+        "/api/products?page=" +
+          (inputUser.page || 1) +
+          "&order=" +
+          (inputUser.order || "") +
+          "&sort=" +
+          (inputUser.sort || "") +
+          "&category=" +
+          (inputUser.category || "")
+      );
+      const { data } = await res.json();
+      return data;
+    } catch (e) {
+      return null;
+    }
+  }
+);
 
 const initialState: any = [
   {

@@ -47,6 +47,9 @@ export const authOptions: NextAuthOptions = {
       if (user != undefined && "name" in user) {
         token.fullname = user.name;
       }
+      if (user != undefined && "fullname" in user) {
+        token.fullname = user.fullname;
+      }
       if (user != undefined && "email" in user) {
         token.email = user.email;
       }

@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useRef, useEffect } from "react"
 import Link from "next/link"
 import { useDispatch, useSelector } from "react-redux"
 import { actions } from "@/app/redux/admin/productSlice"
@@ -10,34 +10,51 @@ import { Suspense } from 'react'
 import Pagination from "./pagination"
 import { CiFilter } from "react-icons/ci";
 import {getProduct} from '@/app/redux/admin/productSlice'
+import ModalAdd from "./modalAdd"
+import ModalFilter from "./modalFilter"
 
 function Products() {
     const dispatch = useDispatch()
+    const filterRef:any = useRef(null)
+    const addRef:any = useRef(null)
     const searchParams = useSearchParams()
     const page = searchParams.get('page')
     const order = searchParams.get('order')
     const sort = searchParams.get('sort')
+    const category = searchParams.get('category')
     const products = useSelector((state: any) => state.products)
     useEffect(() => {
-        // getProducts({ page, order, sort }).then(({ status, data, message }) => {
-        //     if (status) {
-        //         dispatch(actions.setItems(data))
-        //     } else {
-        //         console.log(message)
-        //     }
-        //     setStatus(status)
-        // }).catch((e) => console.log(e))
-        dispatch(getProduct())
-    }, [])
+        dispatch(getProduct({page, order, sort, category}))
+    }, [dispatch, page, order, sort, category])
 
+    const HandlerFilter = () => {
+        if(filterRef.current.style.display == "none"){
+            filterRef.current.style.display = "block"
+        }else{
+            filterRef.current.style.display = "none"
+        }
+    }
+
+
+    const HandlerAdd = () => {
+        if(addRef.current.style.display == "none"){
+            addRef.current.style.display = "block"
+        }else{
+            addRef.current.style.display = "none"
+        }
+    }
+
+    console.log("run..........")
     return (
         <aside className="flex flex-col gap-2 sm:gap-3">
+            <ModalAdd addRef={addRef} />
             <div className="flex justify-between mt-3 md:mt-3 mb-1.5 md:mb-2">
                 <div className="input w-1/2 lg:w-2/5">
                     <input type="text" placeholder="Search here..." className="outline-none border-1.5 border-secondary px-3 py-1.5 w-full lg:py-2 rounded-md text-sm" />
                 </div>
-                <div className="right flex gap-2 lg:gap-2.5">
-                    <CiFilter className="text-4xl font-bold bg-secondary text-white self-baseline" onClick={() => console.log("filter")} />
+                <div className="right flex items-center gap-2 lg:gap-2.5 relative">
+                    <ModalFilter filterRef={filterRef} />
+                    <CiFilter className="text-4xl font-bold bg-secondary text-white rounded-sm sm:rounded-md p-0.5 xl:p-1" onClick={HandlerFilter} />
                     <Link href="/admins/products/add" className="text-white text-sm sm:text-base bg-secondary py-1.5 lg:py-2 px-5 rounded-md">Add Product</Link>
                 </div>
             </div>
@@ -90,7 +107,7 @@ function Products() {
                     </tbody>
                 </table>
             </div>
-            {products.status ? <Pagination /> : null}
+            {products.status && products?.data?.length>0 ? <Pagination /> : null}
         </aside>
     )
 }
