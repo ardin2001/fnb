@@ -2,8 +2,6 @@
 import { useRef, useEffect } from "react"
 import Link from "next/link"
 import { useDispatch, useSelector } from "react-redux"
-import { actions } from "@/app/redux/admin/productSlice"
-import { getProducts } from "@/app/lib/fetch/fetchProducts"
 import Image from "next/image"
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Suspense } from 'react'
@@ -12,8 +10,12 @@ import { CiFilter } from "react-icons/ci";
 import {getProduct} from '@/app/redux/admin/productSlice'
 import ModalAdd from "./modalAdd"
 import ModalFilter from "./modalFilter"
+import { useContext } from "react";
+import { ContentContext } from "@/app/context/ContainerContext";
+import { IoMdAddCircle } from "react-icons/io";
 
 function Products() {
+    const content: any = useContext(ContentContext)
     const dispatch = useDispatch()
     const filterRef:any = useRef(null)
     const addRef:any = useRef(null)
@@ -44,18 +46,18 @@ function Products() {
         }
     }
 
-    console.log("run..........")
     return (
         <aside className="flex flex-col gap-2 sm:gap-3">
             <ModalAdd addRef={addRef} />
-            <div className="flex justify-between mt-3 md:mt-3 mb-1.5 md:mb-2">
-                <div className="input w-1/2 lg:w-2/5">
+            <div className="flex justify-between mt-3 md:mt-3 mb-1.5 md:mb-2 gap-2 sm:gap-2.5 lg:gap-4">
+                <div className="input sm:w-1/2 lg:w-2/5">
                     <input type="text" placeholder="Search here..." className="outline-none border-1.5 border-secondary px-3 py-1.5 w-full lg:py-2 rounded-md text-sm" />
                 </div>
-                <div className="right flex items-center gap-2 lg:gap-2.5 relative">
+                <div className="right flex items-center gap-1 sm:gap-1.5 md:gap-2 lg:gap-2.5 relative">
                     <ModalFilter filterRef={filterRef} />
-                    <CiFilter className="text-4xl font-bold bg-secondary text-white rounded-sm sm:rounded-md p-0.5 xl:p-1" onClick={HandlerFilter} />
-                    <Link href="/admins/products/add" className="text-white text-sm sm:text-base bg-secondary py-1.5 lg:py-2 px-5 rounded-md">Add Product</Link>
+                    <CiFilter className="text-2xl md:text-3xl font-bold bg-secondary text-white rounded-sm sm:rounded-md p-0.5 md:p-1" onClick={HandlerFilter} />
+                    <Link href="/admins/products/add" className="sm:hidden"><IoMdAddCircle className="text-4xl font-bold text-secondary rounded-sm sm:rounded-md p-0.5 xl:p-1" /></Link>
+                    <Link href="/admins/products/add" className="text-white text-sm hidden sm:block bg-secondary py-1.5 lg:py-2 px-5 rounded-md">Add Product</Link>
                 </div>
             </div>
             <div className="tabel bg-white px-4 py-4 max-h-99 overflow-auto scrollbar-transparent">

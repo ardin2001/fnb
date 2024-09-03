@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        main{
+            background-color: aqua;
+            height: 600px;
+        }
+        .container{
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 4;
+        }
+        .box{
+            width: 300px;
+            height: 140px;
+            background-color: red;
+            position: fixed;
+            z-index: 999;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Test</h1>
+        <div class="container" style="display: none;">
+            <div class="box"></div>
+        </div>
+        <button>Test</button>
+    </main>
+
+    <script>
+        document.querySelector('button').addEventListener('click', () => {
+            document.querySelector('.container').style.display = 'block'
+        })
+    </script>
+</body>
+</html>
