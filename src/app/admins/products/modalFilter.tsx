@@ -35,13 +35,13 @@ export default function ModalFilter({ filterRef }: any) {
 
     return (
         <WrapperModal filterRef={filterRef}>
-            <div className="bg-white shadow-basic fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-1 sm:px-1.5 lg:px-2 py-1 lg:py-1.5 w-56 lg:w-64">
+            <div className="bg-white shadow-basic fixed z-50 inset-x-5x sm:inset-x-1/4 md:inset-x-1/3 lg:inset-x-4/10 top-1/2 -translate-y-1/2 px-2.5 sm:px-3 lg:px-4 py-2 lg:py-2.5">
                 <div className="title flex items-center justify-between">
                     <h4 className="font-semibold text-lg text-secondary">Filter Category</h4>
                     <IoMdClose className="text-xl text-secondary font-bold cursor-pointer" onClick={() => filterRef.current.style.display = "none"} />
                 </div>
                 <hr className="border-t-2 border-gray-950 mb-0.5" />
-                <div className="sort flex items-center justify-between gap-0.5 sm:gap-1 lg:gap-2 xl:gap-3">
+                <div className="sort flex items-center justify-between gap-0.5 mb-0.5 sm:gap-1 lg:gap-2 xl:gap-3">
                     <label htmlFor="sort" className="text-gray-800 text-sm flex-1">Category By:</label>
                     <select value={category} onChange={(e) => setCategory(e.target.value)} className="flex-1 bg-slate-50 text-gray-800 text-sm dark:bg-slate-800 pr-1 sm:pr-1.5 xl:pr-10 pl-1 sm:pl-1.5 xl:pl-2 outline-none">
                         <option value="">None</option>
@@ -52,7 +52,7 @@ export default function ModalFilter({ filterRef }: any) {
                     </select>
                 </div>
 
-                <div className="sort flex items-center justify-between gap-0.5 sm:gap-1 lg:gap-1.5 xl:gap-3">
+                <div className="sort flex items-center justify-between mb-0.5 gap-0.5 sm:gap-1 lg:gap-1.5 xl:gap-3">
                     <label htmlFor="sort" className="flex-1 text-gray-800 text-sm">Sort By:</label>
                     <select value={sort} onChange={(e) => setSort(e.target.value)} className="flex-1 bg-slate-50 text-gray-800 text-sm dark:bg-slate-800 pr-1 sm:pr-1.5 xl:pr-10 pl-1 sm:pl-1.5 xl:pl-2 outline-none">
                         <option value="">None</option>
@@ -61,7 +61,7 @@ export default function ModalFilter({ filterRef }: any) {
                     </select>
                 </div>
 
-                <div className="order flex items-center justify-between gap-0.5 sm:gap-1 lg:gap-1.5 xl:gap-3">
+                <div className="order flex items-center justify-between mb-0.5 gap-0.5 sm:gap-1 lg:gap-1.5 xl:gap-3">
                     <label htmlFor="order" className="flex-1 text-gray-800 text-sm">Order By:</label>
                     <select value={order} onChange={(e) => setOrder(e.target.value)} className="flex-1 bg-slate-50 text-gray-800 text-sm dark:bg-slate-800 pr-1 sm:pr-1.5 xl:pr-10 pl-1 sm:pl-1.5 xl:pl-2 outline-none">
                         <option value="">None</option>
@@ -69,7 +69,7 @@ export default function ModalFilter({ filterRef }: any) {
                         <option value={"sold"}>Sold</option>
                     </select>
                 </div>
-                <div className="bottom flex gap-2 sm:gap-2.5 justify-between mt-1 sm:mt-1.5">
+                <div className="bottom flex gap-2 sm:gap-2.5 mb-0.5 justify-between mt-1 sm:mt-1.5 lg:mt-2">
                     <button onClick={HandlerClearFilter} className="text-sm py-0.5 text-tertiary bg-gray-200 font-bold self-center rounded-md w-full text-center">Clear</button>
                     <Link href={
                         pathname + '?' + createQueryString({ sort: sort, order: order, category: category })

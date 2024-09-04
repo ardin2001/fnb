@@ -16,14 +16,17 @@ export async function GET(req: NextRequest) {
   const limits:number = Number(searchParams.get("limit")) || 10;
   const order = searchParams.get("order");
   const category = searchParams.get("category");
+  const name = searchParams.get("name");
   const sort:any = searchParams.get("sort") || "asc";
   const page:number = Number(searchParams.get("page")) || 1;
   try {
     let { status, statusCode, data } = await GetAllProduct(order,sort);
     if (category) {
-      data = data.filter((product: any) => product.category === category).splice((page - 1) * limits, ((page - 1) * limits)+limits)
-    }else if(limits || page){
+      data = data.filter((product: any) => product.category === category)
+    }if(limits || page){
       data = data.splice((page - 1) * limits, ((page - 1) * limits)+limits)
+    }if(name){
+      data = data.filter((product: any) => product.name.toLowerCase().includes(name.toLowerCase()))
     }
     if (status) {
       return NextResponse.json(

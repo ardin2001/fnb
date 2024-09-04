@@ -13,7 +13,9 @@ const getProduct: any = createAsyncThunk(
           "&sort=" +
           (inputUser.sort || "") +
           "&category=" +
-          (inputUser.category || "")
+          (inputUser.category || "") +
+          "&name=" +
+          (inputUser.inputName || "")
       );
       const { data } = await res.json();
       return data;

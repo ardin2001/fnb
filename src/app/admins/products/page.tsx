@@ -1,5 +1,5 @@
 "use client"
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 import Link from "next/link"
 import { useDispatch, useSelector } from "react-redux"
 import Image from "next/image"
@@ -25,9 +25,10 @@ function Products() {
     const sort = searchParams.get('sort')
     const category = searchParams.get('category')
     const products = useSelector((state: any) => state.products)
+    const [inputName, setInputName] = useState(searchParams.get('name') || "")
     useEffect(() => {
-        dispatch(getProduct({page, order, sort, category}))
-    }, [dispatch, page, order, sort, category])
+        dispatch(getProduct({page, order, sort, category,inputName}))
+    }, [dispatch, page, order, sort, category, inputName])
 
     const HandlerFilter = () => {
         if(filterRef.current.style.display == "none"){
@@ -51,7 +52,7 @@ function Products() {
             <ModalAdd addRef={addRef} />
             <div className="flex justify-between mt-3 md:mt-3 mb-1.5 md:mb-2 gap-2 sm:gap-2.5 lg:gap-4">
                 <div className="input sm:w-1/2 lg:w-2/5">
-                    <input type="text" placeholder="Search here..." className="outline-none border-1.5 border-secondary px-3 py-1.5 w-full lg:py-2 rounded-md text-sm" />
+                    <input type="text" value={inputName} onChange={(e) => setInputName(e.target.value)} placeholder="Search here..." className="outline-none border-1.5 border-secondary px-3 py-1.5 w-full lg:py-2 rounded-md text-sm" />
                 </div>
                 <div className="right flex items-center gap-1 sm:gap-1.5 md:gap-2 lg:gap-2.5 relative">
                     <ModalFilter filterRef={filterRef} />
@@ -65,7 +66,7 @@ function Products() {
                     <thead className="border-b-1.5 border-blue-300">
                         <tr>
                             <th className="pb-1.5">Id</th>
-                            <th className="pb-1.5">Name</th>
+                            <th className="pb-1.5 text-start">Name</th>
                             <th className="pb-1.5">Category</th>
                             <th className="pb-1.5">Price</th>
                             <th className="pb-1.5">Sold</th>
@@ -84,14 +85,14 @@ function Products() {
                                     return (
                                         <tr key={product.id} className={`${(index + 1) % 2 == 0 ? "bg-gray-100" : "bg-white"}`}>
                                             <td className="py-1.5">{index + 1}</td>
-                                            <td>{product.name}</td>
+                                            <td className="text-start">{product.name}</td>
                                             <td>{product.category}</td>
                                             <td>{product.price}</td>
                                             <td>{product.sold}</td>
                                             <td className="py-1.5">
                                                 <Image src={product.image} alt="image" width={100} height={100} className="mx-auto h-6 md:h-8 w-12 lg:w-14 object-cover" />
                                             </td>
-                                            <td>
+                                            <td className="px-2 sm:px-0">
                                                 <div className="my-auto flex gap-2 justify-center">
                                                     <Link className="text-white bg-yellow-400 py-1 px-5 rounded-md" href={`/admins/products/${product.id}`}>Edit</Link>
                                                     <Link className="text-white bg-red-500 py-1 px-5 rounded-md" href={`/admins/products/${product.id}`}>Hapus</Link>
