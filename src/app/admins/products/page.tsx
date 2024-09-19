@@ -3,62 +3,62 @@ import { useRef, useEffect, useState } from "react"
 import Link from "next/link"
 import { useDispatch, useSelector } from "react-redux"
 import Image from "next/image"
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import Pagination from "./pagination"
 import { CiFilter } from "react-icons/ci";
-import {getProduct} from '@/app/redux/admin/productSlice'
-import ModalAdd from "./modalAdd"
+import { getProduct } from '@/app/redux/admin/productSlice'
 import ModalFilter from "./modalFilter"
-import { useContext } from "react";
-import { ContentContext } from "@/app/context/ContainerContext";
 import { IoMdAddCircle } from "react-icons/io";
+import ModalDelete from "./modalDelete"
 
 function Products() {
-    const content: any = useContext(ContentContext)
     const dispatch = useDispatch()
-    const filterRef:any = useRef(null)
-    const addRef:any = useRef(null)
+    const filterRef: any = useRef(null)
+    const deleteRef: any = useRef(null)
+    const [id, setId] = useState(null)
     const searchParams = useSearchParams()
     const page = searchParams.get('page')
-    const order = searchParams.get('order')
-    const sort = searchParams.get('sort')
+    const order = searchParams.get('order') || "created_at"
+    const sort = searchParams.get('sort') || "desc"
     const category = searchParams.get('category')
     const products = useSelector((state: any) => state.products)
     const [inputName, setInputName] = useState(searchParams.get('name') || "")
     useEffect(() => {
-        dispatch(getProduct({page, order, sort, category,inputName}))
+        dispatch(getProduct({ page, order, sort, category, inputName }))
     }, [dispatch, page, order, sort, category, inputName])
 
     const HandlerFilter = () => {
-        if(filterRef.current.style.display == "none"){
+        if (filterRef.current.style.display == "none") {
             filterRef.current.style.display = "block"
-        }else{
+        } else {
             filterRef.current.style.display = "none"
         }
     }
 
-
-    const HandlerAdd = () => {
-        if(addRef.current.style.display == "none"){
-            addRef.current.style.display = "block"
-        }else{
-            addRef.current.style.display = "none"
+    const HandlerDelete = (id: any) => {
+        if(id){
+            setId(id)
+        }
+        if (deleteRef.current.style.display == "none") {
+            deleteRef.current.style.display = "block"
+        } else {
+            deleteRef.current.style.display = "none"
         }
     }
 
     return (
         <aside className="flex flex-col gap-2 sm:gap-3">
-            <ModalAdd addRef={addRef} />
             <div className="flex justify-between mt-3 md:mt-3 mb-1.5 md:mb-2 gap-2 sm:gap-2.5 lg:gap-4">
                 <div className="input sm:w-1/2 lg:w-2/5">
                     <input type="text" value={inputName} onChange={(e) => setInputName(e.target.value)} placeholder="Search here..." className="outline-none border-1.5 border-secondary px-3 py-1.5 w-full lg:py-2 rounded-md text-sm" />
                 </div>
                 <div className="right flex items-center gap-1 sm:gap-1.5 md:gap-2 lg:gap-2.5 relative">
-                    <ModalFilter filterRef={filterRef} />
+                    <ModalDelete backRef={deleteRef} id={id} />
+                    <ModalFilter backRef={filterRef} />
                     <CiFilter className="text-2xl md:text-3xl font-bold bg-secondary text-white rounded-sm sm:rounded-md p-0.5 md:p-1" onClick={HandlerFilter} />
-                    <Link href="/admins/products/add" className="sm:hidden"><IoMdAddCircle className="text-4xl font-bold text-secondary rounded-sm sm:rounded-md p-0.5 xl:p-1" /></Link>
-                    <Link href="/admins/products/add" className="text-white text-sm hidden sm:block bg-secondary py-1.5 lg:py-2 px-5 rounded-md">Add Product</Link>
+                    <Link href="/admins/products/add" className="sm:hidden" scroll={false}><IoMdAddCircle className="text-4xl font-bold text-secondary rounded-sm sm:rounded-md p-0.5 xl:p-1" /></Link>
+                    <Link href="/admins/products/add" className="text-white text-sm hidden sm:block bg-secondary py-1.5 lg:py-2 px-5 rounded-md" scroll={false}>Add Product</Link>
                 </div>
             </div>
             <div className="tabel bg-white px-4 py-4 max-h-99 overflow-auto scrollbar-transparent">
@@ -94,8 +94,8 @@ function Products() {
                                             </td>
                                             <td className="px-2 sm:px-0">
                                                 <div className="my-auto flex gap-2 justify-center">
-                                                    <Link className="text-white bg-yellow-400 py-1 px-5 rounded-md" href={`/admins/products/${product.id}`}>Edit</Link>
-                                                    <Link className="text-white bg-red-500 py-1 px-5 rounded-md" href={`/admins/products/${product.id}`}>Hapus</Link>
+                                                    <Link className="text-white bg-yellow-400 py-1 px-5 rounded-md" href={`/admins/products/edit/${product.id}`} scroll={false} >Edit</Link>
+                                                    <button className="text-white bg-red-500 py-1 px-5 rounded-md" type="button" onClick={() => HandlerDelete(product.id)}>Hapus</button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -110,7 +110,7 @@ function Products() {
                     </tbody>
                 </table>
             </div>
-            {products.status && products?.data?.length>0 ? <Pagination /> : null}
+            {products.status && products?.data?.length > 0 ? <Pagination /> : null}
         </aside>
     )
 }

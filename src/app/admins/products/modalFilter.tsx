@@ -5,7 +5,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import WrapperModal from "@/app/wrapper/WrapperModal";
-export default function ModalFilter({ filterRef }: any) {
+export default function ModalFilter({ backRef }: any) {
     const searchParams = useSearchParams()
     const [category, setCategory]: any = useState(searchParams.get('category') || "")
     const [sort, setSort]: any = useState(searchParams.get('sort') || "")
@@ -34,11 +34,11 @@ export default function ModalFilter({ filterRef }: any) {
     }
 
     return (
-        <WrapperModal filterRef={filterRef}>
+        <WrapperModal backRef={backRef} type="modalBox">
             <div className="bg-white shadow-basic fixed z-50 inset-x-5x sm:inset-x-1/4 md:inset-x-1/3 lg:inset-x-4/10 top-1/2 -translate-y-1/2 px-2.5 sm:px-3 lg:px-4 py-2 lg:py-2.5">
                 <div className="title flex items-center justify-between">
                     <h4 className="font-semibold text-lg text-secondary">Filter Category</h4>
-                    <IoMdClose className="text-xl text-secondary font-bold cursor-pointer" onClick={() => filterRef.current.style.display = "none"} />
+                    <IoMdClose className="text-xl text-secondary font-bold cursor-pointer" onClick={() => backRef.current.style.display = "none"} />
                 </div>
                 <hr className="border-t-2 border-gray-950 mb-0.5" />
                 <div className="sort flex items-center justify-between gap-0.5 mb-0.5 sm:gap-1 lg:gap-2 xl:gap-3">

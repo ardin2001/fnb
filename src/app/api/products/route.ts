@@ -13,21 +13,26 @@ import {
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const limits:number = Number(searchParams.get("limit")) || 10;
+  const limits: number = Number(searchParams.get("limit")) || 10;
   const order = searchParams.get("order");
   const category = searchParams.get("category");
   const name = searchParams.get("name");
-  const sort:any = searchParams.get("sort") || "asc";
-  const page:number = Number(searchParams.get("page")) || 1;
+  const sort: any = searchParams.get("sort") || "asc";
+  const page: number = Number(searchParams.get("page")) || 1;
   try {
-    let { status, statusCode, data } = await GetAllProduct(order,sort);
+    let { status, statusCode, data } = await GetAllProduct(order, sort);
     if (category) {
-      data = data.filter((product: any) => product.category === category)
-    }if(limits || page){
-      data = data.splice((page - 1) * limits, ((page - 1) * limits)+limits)
-    }if(name){
-      data = data.filter((product: any) => product.name.toLowerCase().includes(name.toLowerCase()))
+      data = data.filter((product: any) => product.category === category);
     }
+    if (name) {
+      data = data.filter((product: any) =>
+        product.name.toLowerCase().includes(name.toLowerCase())
+      );
+    }
+    if (limits || page) {
+      data = data.slice((page - 1) * limits, (page - 1) * limits + limits);
+    }
+
     if (status) {
       return NextResponse.json(
         {
@@ -86,6 +91,9 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const dataInput = await req.json();
+    dataInput.sold = 500;
+    dataInput.sold = 500;
+    dataInput.rating = 4.1;
     const { status, statusCode }: any = await GetProductBy(dataInput);
     if (status) {
       return NextResponse.json(

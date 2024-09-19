@@ -25,6 +25,77 @@ const getProduct: any = createAsyncThunk(
   }
 );
 
+const postProduct: any = createAsyncThunk(
+  "data/postProduct",
+  async (inputUser: any, thunkAPI) => {
+    try {
+      const res = await fetch("/api/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(inputUser),
+      });
+      const { status } = await res.json();
+      if (status) {
+        try {
+          const res = await fetch("/api/products?name=" + inputUser.name);
+          const { data } = await res.json();
+          return data;
+        } catch (e) {
+          return null;
+        }
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+);
+
+const updateProduct: any = createAsyncThunk(
+  "data/updateProduct",
+  async (inputUser: any, thunkAPI) => {
+    try {
+      const res = await fetch("/api/products/" + inputUser.id, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(inputUser),
+      });
+      const { status } = await res.json();
+      if (status) {
+        return inputUser;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+)
+
+const deleteProduct: any = createAsyncThunk(
+  "data/deleteProduct",
+  async (inputUser: any, thunkAPI) => {
+    try {
+      const res = await fetch("/api/products/" + inputUser.id, {
+        method: "DELETE",
+      });
+      const { status } = await res.json();
+      if (status) {
+        try {
+          const res = await fetch("/api/products?order=created_at&sort=desc");
+          const { data } = await res.json();
+          return data;
+        } catch (e) {
+          return null;
+        }
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+);
+
 const initialState: any = [
   {
     status: null,
@@ -36,9 +107,6 @@ const itemsSlice = createSlice({
   initialState: initialState,
   reducers: {
     setItems: (state: any, action: any) => {
-      // state = action.payload;
-      // state.push(action.payload);
-      // state = [...state, action.payload];
       return { ...state, data: action.payload };
     },
     addItem: (state: any, action: any) => {
@@ -58,14 +126,45 @@ const itemsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getProduct.pending, (state) => {
-        return { ...state, status: null, data: null };
+      .addCase(getProduct.pending, () => {
+        return { status: null, data: null };
       })
       .addCase(getProduct.fulfilled, (state, action) => {
-        return { ...state, status: true, data: action.payload };
+        return { status: true, data: action.payload };
       })
       .addCase(getProduct.rejected, (state) => {
-        return { ...state, status: false, data: null };
+        return { status: false, data: null };
+      });
+
+    builder
+      .addCase(postProduct.fulfilled, (state, action) => {
+        const newState = [...action.payload, ...state.data].slice(0, 10);
+        return { ...state, status: true, data: newState };
+      })
+      .addCase(postProduct.rejected, () => {
+        return { status: false, data: null };
+      });
+
+    builder
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        return { status: true, data: action.payload };
+      })
+      .addCase(deleteProduct.rejected, () => {
+        return { status: false, data: null };
+      });
+
+    builder
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        const newData = state.data.map((item: any) => {
+          if (item.id === action.payload.id) {
+            return { ...item, ...action.payload };
+          }
+          return item;
+        })
+        return { status: true, data: newData };
+      })
+      .addCase(updateProduct.rejected, () => {
+        return { status: false, data: null };
       });
   },
 });
@@ -73,4 +172,4 @@ const itemsSlice = createSlice({
 const actions = itemsSlice.actions;
 const reducerProduct = itemsSlice.reducer;
 
-export { actions, reducerProduct, getProduct };
+export { actions, reducerProduct, getProduct, postProduct, deleteProduct, updateProduct };

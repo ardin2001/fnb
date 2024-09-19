@@ -10,7 +10,7 @@ import {
   getDoc,
   updateDoc,
   orderBy,
-  limit,
+  serverTimestamp,
 } from "firebase/firestore";
 import App from "./config";
 import { getFirestore } from "firebase/firestore";
@@ -62,6 +62,10 @@ export async function GetProductBy(inputUser: any) {
 }
 
 export async function PostProduct(dataInput: any) {
+  dataInput.created_at = serverTimestamp();
+  dataInput.category =
+    dataInput.category[0].toUpperCase() + dataInput.category.slice(1);
+  dataInput.name = dataInput.name[0].toUpperCase() + dataInput.name.slice(1);
   try {
     await setDoc(doc(collection(db, "products")), dataInput);
     return { status: true, statusCode: success };
@@ -70,16 +74,13 @@ export async function PostProduct(dataInput: any) {
   }
 }
 
-export async function GetAllProduct(
-  order: any,
-  sort: "asc" | "desc",
-) {
-  const createQuery = (db:any, order:any, sort:"asc" | "desc") => {
+export async function GetAllProduct(order: any, sort: "asc" | "desc") {
+  const createQuery = (db: any, order: any, sort: "asc" | "desc") => {
     let q;
     if (order) {
       q = query(collection(db, "products"), orderBy(order, sort));
     } else {
-      q = query(collection(db, "products"),);
+      q = query(collection(db, "products"));
     }
     return q;
   };
@@ -115,6 +116,9 @@ export async function UpdateProduct({
   id: string;
   dataUpdate: any;
 }) {
+  dataUpdate.category =
+    dataUpdate.category[0].toUpperCase() + dataUpdate.category.slice(1);
+  dataUpdate.name = dataUpdate.name[0].toUpperCase() + dataUpdate.name.slice(1);
   try {
     await updateDoc(doc(db, "products", id), dataUpdate);
     return { status: true, statusCode: success };
