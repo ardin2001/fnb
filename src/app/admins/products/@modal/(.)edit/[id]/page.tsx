@@ -7,7 +7,7 @@ import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { updateProduct } from "@/app/redux/admin/productSlice"
 
-export default function ModalAdd({ params }: { params: { id: string } }) {
+export default function ModalEdit({ params }: { params: { id: string } }) {
     const router = useRouter()
     const [name, setName]: any = useState("");
     const [category, setCategory]: any = useState("");
@@ -22,7 +22,7 @@ export default function ModalAdd({ params }: { params: { id: string } }) {
         setPrice(productId[0].price)
         setDesc(productId[0].description)
         setImage(productId[0].image)
-    }, [])
+    }, [productId])
     const HandlerClear = () => {
         setName("")
         setCategory("")
