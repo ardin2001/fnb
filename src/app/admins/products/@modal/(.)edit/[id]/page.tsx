@@ -15,13 +15,19 @@ export default function ModalEdit({ params }: { params: { id: string } }) {
     const [desc, setDesc]: any = useState("");
     const [image, setImage]: any = useState("");
     const dispatch = useDispatch()
-    const productId = useSelector((state: any) => state.products.data).filter((item: any) => item.id === params.id)
+    const productId = useSelector((state: any) => state.products.data)
     useEffect(() => {
-        setName(productId[0].name)
-        setCategory(productId[0].category)
-        setPrice(productId[0].price)
-        setDesc(productId[0].description)
-        setImage(productId[0].image)
+        if(productId){
+            productId.forEach((item: any) => {
+                if (item.id == params.id) {
+                    setName(item.name)
+                    setCategory(item.category)
+                    setPrice(item.price)
+                    setDesc(item.description)
+                    setImage(item.image)
+                }
+            })
+        }
     }, [productId])
     const HandlerClear = () => {
         setName("")
@@ -39,7 +45,7 @@ export default function ModalEdit({ params }: { params: { id: string } }) {
     }
     return (
         <WrapperModal type="modal">
-            <div className="bg-white shadow-basic fixed z-50 left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 inset-x-1/10 px-2.5 sm:px-3 xl:px-5 lg:px-4 py-2 lg:py-2.5 xl:py-4 rounded-sm lg:rounded-md">
+            <div className="bg-white shadow-basic fixed z-50 w-90/100 sm:w-4/5 md:w-3/4 lg:w-2/3 xl:w-1/2 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 px-2.5 sm:px-3 xl:px-5 lg:px-4 py-2 lg:py-2.5 xl:py-4 rounded-sm lg:rounded-md">
                 <div className="header-modal flex justify-between">
                     <h1 className="text-2xl font-semibold text-secondary mb-1 sm:mb-2 lg:mb-3 xl:mb-3.5">Edit Product</h1>
                     <AiOutlineCloseSquare
@@ -77,7 +83,7 @@ export default function ModalEdit({ params }: { params: { id: string } }) {
                         <label htmlFor="desc" className="font-medium text-gray-800">Description</label>
                         <textarea value={desc} onChange={(e) => setDesc(e.target.value)} name="desc" id="desc" className="xl:h-32 w-full outline-none border-1.5 border-gray-800 text-gray-500 px-1 sm:px-1.5 md:px-2 rounded-sm lg:rounded-md text-sm py-0.5 md:py-1 lg:py-1.5 xl:py-2" />
                     </div>
-                    <div className="button flex lg:w-2/5 ml-auto gap-2 lg:gap-2.5 xl:gap-3">
+                    <div className="button flex w-full sm:w-1/2 md:w-2/5 ml-auto gap-2 lg:gap-2.5 xl:gap-3">
                         <button className="bg-gray-400 text-white py-2 px-4 rounded-md w-1/2" type="button" onClick={HandlerClear}>Clear All</button>
                         <button className="bg-secondary text-white py-2 px-4 rounded-md w-1/2" type="submit">Save</button>
                     </div>

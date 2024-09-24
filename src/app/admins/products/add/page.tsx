@@ -30,8 +30,7 @@ export default function ModalAdd() {
         setImage("")
     }
     return (
-        <div className="container-modal relative">
-            <div className="bg-white absolute inset-x-2/10 px-2.5 sm:px-3 xl:px-5 lg:px-4 py-2 lg:py-2.5 xl:py-4 rounded-sm lg:rounded-md">
+            <div className="bg-white w-90/100 sm:w-85/100 lg:w-2/3 mx-auto mt-4 sm:mt-0 px-2.5 sm:px-3 xl:px-5 lg:px-4 py-4 lg:py-5 xl:py-6 rounded-sm lg:rounded-md">
                 <h1 className="text-2xl font-semibold text-secondary mb-1 sm:mb-2 lg:mb-3 xl:mb-3.5 text-center">Add Product</h1>
                 <form onSubmit={HanderSubmit} action="" className="flex flex-col gap-1.5 sm:gap-2 md:gap-2.5">
                     <div className="name">
@@ -61,12 +60,11 @@ export default function ModalAdd() {
                         <label htmlFor="desc" className="font-medium text-gray-800">Description</label>
                         <textarea value={desc} onChange={(e) => setDesc(e.target.value)} name="desc" id="desc" className="xl:h-32 w-full outline-none border-1.5 border-gray-800 text-gray-500 px-1 sm:px-1.5 md:px-2 rounded-sm lg:rounded-md text-sm py-0.5 md:py-1 lg:py-1.5 xl:py-2" />
                     </div>
-                    <div className="button flex lg:w-2/5 ml-auto gap-2 lg:gap-2.5 xl:gap-3">
+                    <div className="button flex w-full sm:w-1/2 md:w-2/5 ml-auto gap-2 lg:gap-2.5 xl:gap-3">
                         <button className="bg-gray-400 text-white py-2 px-4 rounded-md w-1/2" type="button" onClick={HandlerClear}>Clear All</button>
                         <button className="bg-secondary text-white py-2 px-4 rounded-md w-1/2" type="submit">Save</button>
                     </div>
                 </form>
             </div>
-        </div>
     )
 }

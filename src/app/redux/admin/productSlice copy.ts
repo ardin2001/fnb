@@ -105,7 +105,25 @@ const initialState: any = [
 const itemsSlice = createSlice({
   name: "products",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    setItems: (state: any, action: any) => {
+      return { ...state, data: action.payload };
+    },
+    addItem: (state: any, action: any) => {
+      state.data.push(action.payload);
+    },
+    removeItem: (state: any, action: any) => {
+      state = state.data.filter((item: any) => item.id !== action.payload);
+    },
+    updateItem: (state: any, action: any) => {
+      const index = state.data.findIndex(
+        (item: any) => item.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.data[index] = action.payload;
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getProduct.pending, () => {
@@ -154,4 +172,4 @@ const itemsSlice = createSlice({
 const actions = itemsSlice.actions;
 const reducerProduct = itemsSlice.reducer;
 
-export { reducerProduct, getProduct, postProduct, deleteProduct, updateProduct };
+export { actions, reducerProduct, getProduct, postProduct, deleteProduct, updateProduct };

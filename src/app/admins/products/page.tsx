@@ -3,7 +3,7 @@ import { useRef, useEffect, useState } from "react"
 import Link from "next/link"
 import { useDispatch, useSelector } from "react-redux"
 import Image from "next/image"
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import Pagination from "./pagination"
 import { CiFilter } from "react-icons/ci";
@@ -13,12 +13,13 @@ import { IoMdAddCircle } from "react-icons/io";
 import ModalDelete from "./modalDelete"
 
 function Products() {
+    const router = useRouter()
     const dispatch = useDispatch()
     const filterRef: any = useRef(null)
     const deleteRef: any = useRef(null)
     const [id, setId] = useState(null)
     const searchParams = useSearchParams()
-    const page = searchParams.get('page')
+    const page = searchParams.get('page') || 1
     const order = searchParams.get('order') || "created_at"
     const sort = searchParams.get('sort') || "desc"
     const category = searchParams.get('category')
@@ -57,8 +58,8 @@ function Products() {
                     <ModalDelete backRef={deleteRef} id={id} />
                     <ModalFilter backRef={filterRef} />
                     <CiFilter className="text-2xl md:text-3xl font-bold bg-secondary text-white rounded-sm sm:rounded-md p-0.5 md:p-1" onClick={HandlerFilter} />
-                    <Link href="/admins/products/add" className="sm:hidden" scroll={false}><IoMdAddCircle className="text-4xl font-bold text-secondary rounded-sm sm:rounded-md p-0.5 xl:p-1" /></Link>
-                    <Link href="/admins/products/add" className="text-white text-sm hidden sm:block bg-secondary py-1.5 lg:py-2 px-5 rounded-md" scroll={false}>Add Product</Link>
+                    <Link href={`/admins/products/add?page=${page}`} className="sm:hidden" scroll={false}><IoMdAddCircle className="text-4xl font-bold text-secondary rounded-sm sm:rounded-md p-0.5 xl:p-1" /></Link>
+                    <Link href={`/admins/products/add?page=${page}`} className="text-white text-sm hidden sm:block bg-secondary py-1.5 lg:py-2 px-5 rounded-md" scroll={false}>Add Product</Link>
                 </div>
             </div>
             <div className="tabel bg-white px-4 py-4 max-h-99 overflow-auto scrollbar-transparent">
@@ -94,7 +95,7 @@ function Products() {
                                             </td>
                                             <td className="px-2 sm:px-0">
                                                 <div className="my-auto flex gap-2 justify-center">
-                                                    <Link className="text-white bg-yellow-400 py-1 px-5 rounded-md" href={`/admins/products/edit/${product.id}`} scroll={false} >Edit</Link>
+                                                    <Link className="text-white bg-yellow-400 py-1 px-5 rounded-md" href={`/admins/products/edit/${product.id}?page=${page}`} scroll={false} >Edit</Link>
                                                     <button className="text-white bg-red-500 py-1 px-5 rounded-md" type="button" onClick={() => HandlerDelete(product.id)}>Hapus</button>
                                                 </div>
                                             </td>
