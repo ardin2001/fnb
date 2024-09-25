@@ -154,4 +154,4 @@ const itemsSlice = createSlice({
 const actions = itemsSlice.actions;
 const reducerProduct = itemsSlice.reducer;
 
-export { reducerProduct, getProduct, postProduct, deleteProduct, updateProduct };
+export { reducerProduct, actions, getProduct, postProduct, deleteProduct, updateProduct };
