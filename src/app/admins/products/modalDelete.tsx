@@ -9,7 +9,7 @@ export default function ModalDelete({ backRef, id }: any) {
         dispatch(deleteProduct({ id }));
         setTimeout(() => {
             backRef.current.style.display = "none"
-        }, 100);
+        }, 500);
     }
     return (
         <WrapperModal backRef={backRef} type="modalBox">

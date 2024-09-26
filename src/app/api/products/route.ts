@@ -91,9 +91,6 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const dataInput = await req.json();
-    dataInput.sold = 500;
-    dataInput.sold = 500;
-    dataInput.rating = 4.1;
     const { status, statusCode }: any = await GetProductBy(dataInput);
     if (status) {
       return NextResponse.json(

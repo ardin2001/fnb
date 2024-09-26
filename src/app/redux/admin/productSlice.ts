@@ -28,6 +28,8 @@ const getProduct: any = createAsyncThunk(
 const postProduct: any = createAsyncThunk(
   "data/postProduct",
   async (inputUser: any, thunkAPI) => {
+    inputUser.sold = 450;
+    inputUser.rating = 4.1;
     try {
       const res = await fetch("/api/products", {
         method: "POST",
@@ -71,7 +73,7 @@ const updateProduct: any = createAsyncThunk(
       return null;
     }
   }
-)
+);
 
 const deleteProduct: any = createAsyncThunk(
   "data/deleteProduct",
@@ -142,7 +144,7 @@ const itemsSlice = createSlice({
             return { ...item, ...action.payload };
           }
           return item;
-        })
+        });
         return { status: true, data: newData };
       })
       .addCase(updateProduct.rejected, () => {
@@ -154,4 +156,11 @@ const itemsSlice = createSlice({
 const actions = itemsSlice.actions;
 const reducerProduct = itemsSlice.reducer;
 
-export { reducerProduct, actions, getProduct, postProduct, deleteProduct, updateProduct };
+export {
+  reducerProduct,
+  actions,
+  getProduct,
+  postProduct,
+  deleteProduct,
+  updateProduct,
+};

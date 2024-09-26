@@ -41,7 +41,7 @@ export default function ModalEdit({ params }: { params: { id: string } }) {
         dispatch(updateProduct({ id: params.id, name: name[0].toUpperCase() + name.slice(1), category: category[0].toUpperCase() + category.slice(1), price, desc, image }))
         setTimeout(() => {
             router.back()
-        }, 200);
+        }, 500);
     }
     return (
         <WrapperModal type="modal">
@@ -57,11 +57,11 @@ export default function ModalEdit({ params }: { params: { id: string } }) {
                 <form onSubmit={HanderSubmit} action="" className="flex flex-col gap-1.5 sm:gap-2 md:gap-2.5">
                     <div className="name">
                         <label htmlFor="name" className="font-medium text-gray-800">Name</label>
-                        <input value={name} onChange={(e) => setName(e.target.value)} type="text" name="name" id="name" className="w-full outline-none border-1.5 border-gray-800 text-gray-500 px-1 sm:px-1.5 md:px-2 rounded-sm lg:rounded-md text-sm py-0.5 md:py-1 lg:py-1.5 xl:py-2" />
+                        <input value={name} onChange={(e) => setName(e.target.value)} type="text" name="name" id="name" className="w-full outline-none border-1.5 border-gray-800 text-gray-500 px-1 sm:px-1.5 md:px-2 rounded-sm lg:rounded-md text-sm py-1.5 lg:py-2" />
                     </div>
                     <div className="category">
                         <label htmlFor="category" className="font-medium text-gray-800">Category</label>
-                        <select name="category" value={category} onChange={(e) => setCategory(e.target.value)} id="category" className="w-full outline-none border-1.5 border-gray-800 text-gray-500 px-1 sm:px-1.5 md:px-2 rounded-sm lg:rounded-md text-sm py-0.5 md:py-1 lg:py-1.5 xl:py-2">
+                        <select name="category" value={category} onChange={(e) => setCategory(e.target.value)} id="category" className="w-full outline-none border-1.5 border-gray-800 text-gray-500 px-1 sm:px-1.5 md:px-2 rounded-sm lg:rounded-md text-sm py-1.5 lg:py-2">
                             <option value="">Select Category</option>
                             <option value="Food">Food</option>
                             <option value="Drink">Drink</option>
@@ -73,15 +73,15 @@ export default function ModalEdit({ params }: { params: { id: string } }) {
                     </div>
                     <div className="price">
                         <label htmlFor="price" className="font-medium text-gray-800">Price</label>
-                        <input value={price} onChange={(e) => setPrice(e.target.value)} type="text" name="price" id="price" className="w-full outline-none border-1.5 border-gray-800 text-gray-500 px-1 sm:px-1.5 md:px-2 rounded-sm lg:rounded-md text-sm py-0.5 md:py-1 lg:py-1.5 xl:py-2" />
+                        <input value={price} onChange={(e) => setPrice(e.target.value)} type="text" name="price" id="price" className="w-full outline-none border-1.5 border-gray-800 text-gray-500 px-1 sm:px-1.5 md:px-2 rounded-sm lg:rounded-md text-sm py-1.5 lg:py-2" />
                     </div>
                     <div className="image">
                         <label htmlFor="image" className="font-medium text-gray-800">Image</label>
-                        <input value={image} onChange={(e) => setImage(e.target.value)} type="text" name="image" id="image" className="w-full outline-none border-1.5 border-gray-800 text-gray-500 px-1 sm:px-1.5 md:px-2 rounded-sm lg:rounded-md text-sm py-0.5 md:py-1 lg:py-1.5 xl:py-2" />
+                        <input value={image} onChange={(e) => setImage(e.target.value)} type="text" name="image" id="image" className="w-full outline-none border-1.5 border-gray-800 text-gray-500 px-1 sm:px-1.5 md:px-2 rounded-sm lg:rounded-md text-sm py-1.5 lg:py-2" />
                     </div>
                     <div className="desc">
                         <label htmlFor="desc" className="font-medium text-gray-800">Description</label>
-                        <textarea value={desc} onChange={(e) => setDesc(e.target.value)} name="desc" id="desc" className="xl:h-32 w-full outline-none border-1.5 border-gray-800 text-gray-500 px-1 sm:px-1.5 md:px-2 rounded-sm lg:rounded-md text-sm py-0.5 md:py-1 lg:py-1.5 xl:py-2" />
+                        <textarea value={desc} onChange={(e) => setDesc(e.target.value)} name="desc" id="desc" className="h-32 xl:h-32 w-full outline-none border-1.5 border-gray-800 text-gray-500 px-1 sm:px-1.5 md:px-2 rounded-sm lg:rounded-md text-sm py-1.5 lg:py-2" />
                     </div>
                     <div className="button flex w-full sm:w-1/2 md:w-2/5 ml-auto gap-2 lg:gap-2.5 xl:gap-3">
                         <button className="bg-gray-400 text-white py-2 px-4 rounded-md w-1/2" type="button" onClick={HandlerClear}>Clear All</button>
