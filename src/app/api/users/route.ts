@@ -9,14 +9,30 @@ import {
 import validator from "./validator";
 
 export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const limits: number = Number(searchParams.get("limit")) || 10;
+  const order = searchParams.get("order");
+  const name = searchParams.get("name");
+  const sort: any = searchParams.get("sort") || "asc";
+  const page: number = Number(searchParams.get("page")) || 1;
   try {
-    const { status, data, statusCode } = await GetAllUser();
+    let { status, statusCode, data } = await GetAllUser(order, sort);
+    if (name) {
+      data = data.filter((user: any) =>
+        user.fullname.toLowerCase().includes(name.toLowerCase())
+      );
+    }
+    if (limits || page) {
+      data = data.slice((page - 1) * limits, (page - 1) * limits + limits);
+    }
+
     if (status) {
       return NextResponse.json(
         {
           status,
           statusCode,
-          message: "Successfully get all user data",
+          message: "Success get all users data",
+          page: page,
           data,
         },
         {
@@ -64,6 +80,7 @@ export async function GET(req: NextRequest) {
     );
   }
 }
+
 
 export async function POST(req: NextRequest) {
   try {

@@ -4,6 +4,7 @@ import "./globals.css";
 import WrapperSession from "./wrapper/WrapperSession";
 import SidebarContextProvider from "./context/SidebarContext";
 import ThemeContextProvider from "./context/ThemeContext";
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({ subsets: ["latin"] });
 

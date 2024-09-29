@@ -9,6 +9,8 @@ import {
   or,
   getDoc,
   updateDoc,
+  serverTimestamp,
+  orderBy,
 } from "firebase/firestore";
 import App from "./config";
 import { getFirestore } from "firebase/firestore";
@@ -60,6 +62,7 @@ export async function GetUserBy(inputUser: any) {
 }
 
 export async function PostUser(dataInput: any) {
+  dataInput.created_at = serverTimestamp();
   try {
     await setDoc(doc(collection(db, "users")), dataInput);
     return { status: true, statusCode: success };
@@ -68,9 +71,19 @@ export async function PostUser(dataInput: any) {
   }
 }
 
-export async function GetAllUser() {
+export async function GetAllUser(order: any, sort: "asc" | "desc") {
+  const createQuery = (db: any, order: any, sort: "asc" | "desc") => {
+    let q;
+    if (order) {
+      q = query(collection(db, "users"), orderBy(order, sort));
+    } else {
+      q = query(collection(db, "users"));
+    }
+    return q;
+  };
   try {
-    const querySnapshot = await getDocs(collection(db, "users"));
+    const q = createQuery(db, order, sort);
+    const querySnapshot = await getDocs(q);
     const response: any = querySnapshot.docs.map((doc) => {
       return {
         id: doc.id,
