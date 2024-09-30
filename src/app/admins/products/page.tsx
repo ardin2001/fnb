@@ -7,10 +7,11 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import Pagination from "./pagination"
 import { CiFilter } from "react-icons/ci";
-import { getProduct } from '@/app/redux/admin/productSlice'
+import { actions, getProduct } from '@/app/redux/admin/productSlice'
 import ModalFilter from "./modalFilter"
 import { IoMdAddCircle } from "react-icons/io";
 import ModalDelete from "./modalDelete"
+import { Bounce, toast, ToastContainer } from "react-toastify"
 
 function Products() {
     const router = useRouter()
@@ -25,9 +26,46 @@ function Products() {
     const category = searchParams.get('category')
     const products = useSelector((state: any) => state.products)
     const [inputName, setInputName] = useState(searchParams.get('name') || "")
+
     useEffect(() => {
         dispatch(getProduct({ page, order, sort, category, inputName }))
     }, [dispatch, page, order, sort, category, inputName])
+
+    useEffect(() => {
+        if (products.statusCode == 200) {
+            toast.success(products.message, {
+                position: "bottom-right",
+                autoClose: 800,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+                style: {
+                    fontSize: "14px",
+                }
+            });
+            dispatch(actions.setClearStatusCode());
+        } else if (products.statusCode == 409) {
+            toast.error(products.message, {
+                position: "bottom-right",
+                autoClose: 800,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+                style: {
+                    fontSize: "14px",
+                }
+            });
+            dispatch(actions.setClearStatusCode());
+        }
+    }, [products.statusCode])
 
     const HandlerFilter = () => {
         if (filterRef.current.style.display == "none") {
@@ -38,7 +76,7 @@ function Products() {
     }
 
     const HandlerDelete = (id: any) => {
-        if(id){
+        if (id) {
             setId(id)
         }
         if (deleteRef.current.style.display == "none") {
@@ -50,6 +88,7 @@ function Products() {
 
     return (
         <aside className="flex flex-col gap-2 sm:gap-3">
+            <ToastContainer />
             <div className="flex justify-between mt-3 md:mt-3 mb-1.5 md:mb-2 gap-2 sm:gap-2.5 lg:gap-4">
                 <div className="input sm:w-1/2 lg:w-2/5">
                     <input type="text" value={inputName} onChange={(e) => setInputName(e.target.value)} placeholder="Search here..." className="outline-none border-1.5 border-secondary px-3 py-1.5 w-full lg:py-2 rounded-md text-sm" />
@@ -111,7 +150,7 @@ function Products() {
                     </tbody>
                 </table>
             </div>
-            {products.status && products?.data?.length > 0 ? <Pagination /> : null}
+            {products.status ? <Pagination /> : null}
         </aside>
     )
 }

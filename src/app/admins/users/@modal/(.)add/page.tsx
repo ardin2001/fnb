@@ -16,9 +16,9 @@ export default function ModalAdd() {
     const HanderSubmit = (e: any) => {
         e.preventDefault()
         dispatch(postUser({fullname:name, email, password}))
-        // setTimeout(() => {
-        //     router.back()
-        // }, 500);
+        setTimeout(() => {
+            router.back()
+        }, 500);
     }
     const HandlerClear = () => {
         setName("")

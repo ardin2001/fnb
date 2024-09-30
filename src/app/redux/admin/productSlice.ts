@@ -17,10 +17,10 @@ const getProduct: any = createAsyncThunk(
           "&name=" +
           (inputUser.inputName || "")
       );
-      const { data } = await res.json();
-      return data;
+      const { status, data } = await res.json();
+      return { status, data };
     } catch (e) {
-      return null;
+      return { data: null, status: false };
     }
   }
 );
@@ -38,18 +38,20 @@ const postProduct: any = createAsyncThunk(
         },
         body: JSON.stringify(inputUser),
       });
-      const { status } = await res.json();
+      const { status, statusCode, data } = await res.json();
       if (status) {
         try {
           const res = await fetch("/api/products?name=" + inputUser.name);
-          const { data } = await res.json();
-          return data;
+          const { status, statusCode, data } = await res.json();
+          return { status, statusCode, data };
         } catch (e) {
-          return null;
+          return { status: false, statusCode: 401, data: null };
         }
+      }else {
+        return { status, statusCode, data };
       }
     } catch (e) {
-      return null;
+      return { status: false, statusCode: 401, data: null };
     }
   }
 );
@@ -67,10 +69,12 @@ const updateProduct: any = createAsyncThunk(
       });
       const { status } = await res.json();
       if (status) {
-        return inputUser;
+        return { status: true, statusCode: 200, data: inputUser };
+      } else {
+        return { status: false, statusCode: 409, data: inputUser };
       }
     } catch (e) {
-      return null;
+      return { status: false, statusCode: 401, data: null };
     }
   }
 );
@@ -87,13 +91,15 @@ const deleteProduct: any = createAsyncThunk(
         try {
           const res = await fetch("/api/products?order=created_at&sort=desc");
           const { data } = await res.json();
-          return data;
+          return { status: true, statusCode: 200, data };
         } catch (e) {
-          return null;
+          return { status: false, statusCode: 401, data: null };
         }
+      }else {
+        return { status: false, statusCode: 409, data: null };
       }
     } catch (e) {
-      return null;
+      return { status: false, statusCode: 401, data: null };
     }
   }
 );
@@ -107,49 +113,84 @@ const initialState: any = [
 const itemsSlice = createSlice({
   name: "products",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    setClearStatusCode(state: any) {
+      return {
+        ...state,
+        statusCode: null,
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getProduct.pending, () => {
         return { status: null, data: null };
       })
       .addCase(getProduct.fulfilled, (state, action) => {
-        return { status: true, data: action.payload };
+        return action.payload;
       })
       .addCase(getProduct.rejected, (state) => {
         return { status: false, data: null };
       });
 
     builder
-      .addCase(postProduct.fulfilled, (state, action) => {
-        const newState = [...action.payload, ...state.data].slice(0, 10);
-        return { ...state, status: true, data: newState };
-      })
-      .addCase(postProduct.rejected, () => {
-        return { status: false, data: null };
-      });
+    .addCase(postProduct.fulfilled, (state, action) => {
+      let newState;
+      if (action.payload.statusCode === 200) {
+        newState = [...action.payload.data, ...state.data].slice(0, 10);
+        return {
+          ...state,
+          status: action.payload.status,
+          data: newState,
+          statusCode: action.payload.statusCode,
+          message: "Successfully created product data!",
+        };
+      } else if (action.payload.statusCode === 409) {
+        return {
+          ...state,
+          status: true,
+          statusCode: action.payload.statusCode,
+          message: "Failed add product data!",
+        };
+      }
+    })
+    .addCase(postProduct.rejected, (state, action) => {
+      return action.payload;
+    });
 
     builder
-      .addCase(deleteProduct.fulfilled, (state, action) => {
-        return { status: true, data: action.payload };
-      })
-      .addCase(deleteProduct.rejected, () => {
-        return { status: false, data: null };
+    .addCase(updateProduct.fulfilled, (state, action) => {
+      const newData = state.data.map((item: any) => {
+        if (item.id === action.payload.data.id) {
+          return { ...item, ...action.payload.data };
+        }
+        return item;
       });
+      return {
+        ...state,
+        status: true,
+        data: newData,
+        statusCode: action.payload.statusCode,
+        message: "Successfully updated product data!",
+      };
+    })
+    .addCase(updateProduct.rejected, () => {
+      return { status: false, data: null };
+    });
 
     builder
-      .addCase(updateProduct.fulfilled, (state, action) => {
-        const newData = state.data.map((item: any) => {
-          if (item.id === action.payload.id) {
-            return { ...item, ...action.payload };
-          }
-          return item;
-        });
-        return { status: true, data: newData };
-      })
-      .addCase(updateProduct.rejected, () => {
-        return { status: false, data: null };
-      });
+    .addCase(deleteProduct.fulfilled, (state, action) => {
+      return {
+        ...state,
+        status: true,
+        data: action.payload.data,
+        statusCode: action.payload.statusCode,
+        message: "Successfully deleted product data!",
+      };
+    })
+    .addCase(deleteProduct.rejected, () => {
+      return { status: false, data: null };
+    });
   },
 });
 

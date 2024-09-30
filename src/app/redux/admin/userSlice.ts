@@ -17,10 +17,10 @@ const getUser: any = createAsyncThunk(
           "&name=" +
           (inputUser.inputName || "")
       );
-      const { data } = await res.json();
-      return data;
+      const { data, status } = await res.json();
+      return { data, status };
     } catch (e) {
-      return null;
+      return { data: null, status: false };
     }
   }
 );
@@ -36,20 +36,20 @@ const postUser: any = createAsyncThunk(
         },
         body: JSON.stringify(inputUser),
       });
-      const { status } = await res.json();
+      const { status, statusCode, data } = await res.json();
       if (status) {
         try {
           const res = await fetch("/api/users?name=" + inputUser.fullname);
-          const { data } = await res.json();
-          return { data, statusCode: 200 };
+          const { status, statusCode, data } = await res.json();
+          return { status, statusCode, data };
         } catch (e) {
-          return null;
+          return { status: false, statusCode: 401, data: null };
         }
       } else {
-        return { status: false, statusCode: 409 };
+        return { status, statusCode, data };
       }
     } catch (e) {
-      return { status: false, statusCode: 401 };
+      return { status: false, statusCode: 401, data: null };
     }
   }
 );
@@ -67,12 +67,12 @@ const updateUser: any = createAsyncThunk(
       });
       const { status } = await res.json();
       if (status) {
-        return inputUser;
+        return { status: true, statusCode: 200, data: inputUser };
       } else {
-        return { status: false, data: inputUser, statusCode: 409 };
+        return { status: false, statusCode: 409, data: inputUser };
       }
     } catch (e) {
-      return { status: false, statusCode: 401 };
+      return { status: false, statusCode: 401, data: null };
     }
   }
 );
@@ -89,15 +89,15 @@ const deleteUser: any = createAsyncThunk(
         try {
           const res = await fetch("/api/users?order=created_at&sort=desc");
           const { data } = await res.json();
-          return { status: true, data, statusCode: 200 };
+          return { status: true, statusCode: 200, data };
         } catch (e) {
-          return { status: false, statusCode: 401 };
+          return { status: false, statusCode: 401, data: null };
         }
       } else {
-        return { status: false, statusCode: 409 };
+        return { status: false, statusCode: 409, data: null };
       }
     } catch (e) {
-      return { status: false, statusCode: 401 };
+      return { status: false, statusCode: 401, data: null };
     }
   }
 );
@@ -112,20 +112,20 @@ const itemsSlice = createSlice({
   name: "users",
   initialState: initialState,
   reducers: {
-    setClearStatusCode (state: any) {
+    setClearStatusCode(state: any) {
       return {
         ...state,
         statusCode: null,
-      }
-    }
+      };
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(getUser.pending, () => {
         return { status: null, data: null };
       })
-      .addCase(getUser.fulfilled, (state, action) => {
-        return { status: true, data: action.payload };
+      .addCase(getUser.fulfilled, (state, action: any) => {
+        return action.payload;
       })
       .addCase(getUser.rejected, (state) => {
         return { status: false, data: null };
@@ -138,7 +138,7 @@ const itemsSlice = createSlice({
           newState = [...action.payload.data, ...state.data].slice(0, 10);
           return {
             ...state,
-            status: true,
+            status: action.payload.status,
             data: newState,
             statusCode: action.payload.statusCode,
             message: "Successfully created user data!",
@@ -152,22 +152,8 @@ const itemsSlice = createSlice({
           };
         }
       })
-      .addCase(postUser.rejected, () => {
-        return { status: false, data: null };
-      });
-
-    builder
-      .addCase(deleteUser.fulfilled, (state, action) => {
-        return {
-          ...state,
-          status: true,
-          data: action.payload.data,
-          statusCode: action.payload.statusCode,
-          message: "Successfully deleted user data!",
-        };
-      })
-      .addCase(deleteUser.rejected, () => {
-        return { status: false, data: null };
+      .addCase(postUser.rejected, (state, action) => {
+        return action.payload;
       });
 
     builder
@@ -187,6 +173,20 @@ const itemsSlice = createSlice({
         };
       })
       .addCase(updateUser.rejected, () => {
+        return { status: false, data: null };
+      });
+
+    builder
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        return {
+          ...state,
+          status: true,
+          data: action.payload.data,
+          statusCode: action.payload.statusCode,
+          message: "Successfully deleted user data!",
+        };
+      })
+      .addCase(deleteUser.rejected, () => {
         return { status: false, data: null };
       });
   },

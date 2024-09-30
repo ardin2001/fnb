@@ -38,7 +38,7 @@ export default function ModalEdit({ params }: { params: { id: string } }) {
     }
     const HanderSubmit = (e: any) => {
         e.preventDefault()
-        dispatch(updateProduct({ id: params.id, name: name[0].toUpperCase() + name.slice(1), category: category[0].toUpperCase() + category.slice(1), price, desc, image }))
+        dispatch(updateProduct({ id: params.id, name, category, price, desc, image }))
         setTimeout(() => {
             router.back()
         }, 500);

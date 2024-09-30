@@ -41,6 +41,9 @@ function Users() {
                 progress: undefined,
                 theme: "colored",
                 transition: Bounce,
+                style: {
+                    fontSize: "14px",
+                }
             });
             dispatch(actions.setClearStatusCode());
         } else if (users.statusCode == 409) {
@@ -54,6 +57,9 @@ function Users() {
                 progress: undefined,
                 theme: "colored",
                 transition: Bounce,
+                style: {
+                    fontSize: "14px",
+                }
             });
             dispatch(actions.setClearStatusCode());
         }
@@ -139,7 +145,7 @@ function Users() {
                     </tbody>
                 </table>
             </div>
-            {users?.status && users?.data?.length > 0 ? <Pagination /> : null}
+            {users?.status  ? <Pagination /> : null}
         </aside>
     )
 }
